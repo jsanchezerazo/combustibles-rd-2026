@@ -181,6 +181,57 @@
     .kpi-grid { grid-template-columns: 1fr 1fr; }
     .two-col, .breakdown-grid { grid-template-columns: 1fr; }
   }
+
+  /* ── TABS ── */
+  .tab-nav {
+    display: flex; gap: 0; margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--gray2); background: transparent;
+  }
+  .tab-btn {
+    padding: 10px 22px; font-size: 12px; font-weight: 600;
+    font-family: inherit; background: none; border: none;
+    border-bottom: 3px solid transparent; margin-bottom: -2px;
+    cursor: pointer; color: var(--textS); transition: all .15s;
+    letter-spacing: 0.03em; text-transform: uppercase;
+  }
+  .tab-btn:hover { color: var(--navy); }
+  .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* ── TRACKING ── */
+  .tracking-header {
+    background: var(--white); border: 0.5px solid var(--gray2);
+    border-radius: 12px; padding: 14px 18px; margin-bottom: 1.25rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+  }
+  .tracking-date { font-size: 13px; font-weight: 700; color: var(--navy); }
+  .scenario-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 700;
+  }
+  .badge-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .history-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .history-table thead th {
+    background: var(--navy); color: var(--white); padding: 8px 12px;
+    text-align: left; font-weight: 600; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .history-table thead th:first-child { border-radius: 8px 0 0 0; }
+  .history-table thead th:last-child  { border-radius: 0 8px 0 0; }
+  .history-table tbody tr:nth-child(even) { background: var(--gray1); }
+  .history-table tbody tr:hover { background: var(--blueXL); }
+  .history-table tbody td { padding: 7px 12px; color: var(--navy); border-bottom: 0.5px solid var(--gray2); }
+  .history-table tbody td:first-child { font-weight: 600; }
+  .sce-pill {
+    display: inline-block; padding: 2px 9px; border-radius: 10px;
+    font-size: 10px; font-weight: 700;
+  }
+  .sce-alivio  { background: var(--greenL);  color: #1B5E20; }
+  .sce-base    { background: var(--blueXL);  color: #0D47A1; }
+  .sce-escalada{ background: var(--redL);    color: #B71C1C; }
+  .sce-custom  { background: var(--purpleL); color: #26215C; }
+
 </style>
 </head>
 <body>
@@ -191,7 +242,7 @@
       <div class="header-logo">RD</div>
       <div>
         <div class="header-title">Análisis de Escenarios — Subsidios Combustibles 2026</div>
-        <div class="header-sub">MICM · Ministro Yayo Sanz Lovatón · Corte: 21 de marzo de 2026 · CONFIDENCIAL</div>
+        <div class="header-sub">MICM · Ministro Yayo Sanz Lovatón · CONFIDENCIAL</div>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:18px">
@@ -207,6 +258,13 @@
 </header>
 
 <main class="main">
+  <!-- TAB NAV -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('escenarios')">&#128202; An&#225;lisis de Escenarios</button>
+    <button class="tab-btn" onclick="switchTab('tracking')">&#128200; Seguimiento Diario</button>
+  </div>
+  <!-- TAB 1: ESCENARIOS -->
+  <div id="tab-escenarios" class="tab-pane active">
 
   <div class="section-label">Selecciona un escenario de análisis</div>
   <div class="scenario-pills">
@@ -326,10 +384,110 @@
     </div>
   </div>
 
+  </div><!-- /tab-escenarios -->
+
+  <!-- TAB 2: SEGUIMIENTO DIARIO -->
+  <div id="tab-tracking" class="tab-pane">
+
+    <div class="tracking-header">
+      <div>
+        <div class="tracking-date">Corte: <span id="tr-fecha-display" style="color:var(--blue)">—</span>
+          <span style="font-size:11px;color:var(--textS);font-weight:400;margin-left:10px">· Actualización automática · 6:00 AM hora RD</span>
+        </div>
+        <div style="font-size:10px;color:var(--textS);margin-top:4px">Fuente WTI: EIA / Yahoo Finance · Subsidio: función calibrada ene–mar 2026</div>
+      </div>
+    </div>
+
+    <div class="kpi-grid" style="margin-bottom:1.25rem">
+      <div class="kpi">
+        <div class="kpi-lbl">WTI Actual</div>
+        <div class="kpi-val" id="tr-wti">—</div>
+        <div class="kpi-d" id="tr-wti-d">Precio del barril (USD)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Subsidio Proyectado</div>
+        <div class="kpi-val" id="tr-sub">—</div>
+        <div class="kpi-d">Estimado semanal (RD$M)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Presupuesto Restante</div>
+        <div class="kpi-val" id="tr-rest">—</div>
+        <div class="kpi-d" id="tr-rest-d">Disponible sin reasignación</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Semanas Disponibles</div>
+        <div class="kpi-val" id="tr-weeks">—</div>
+        <div class="kpi-d" id="tr-weeks-d">Al ritmo de subsidio actual</div>
+      </div>
+    </div>
+
+    <div id="tr-context" class="context-box" style="margin-bottom:1.25rem">Cargando análisis del escenario...</div>
+
+    <div class="card" style="margin-bottom:1.25rem">
+      <div class="card-title">Ejecución presupuestal · Techo RD$13,748M</div>
+      <div style="margin-top:12px">
+        <!-- Legend -->
+        <div class="lgd" style="margin-bottom:8px">
+          <span><span class="lgd-sq" style="background:#185FA5"></span>Ejecutado acumulado (ene–corte)</span>
+          <span><span class="lgd-sq" style="background:#FF6F00"></span>Proyectado esta semana</span>
+          <span><span class="lgd-sq" style="background:var(--gray2)"></span>Disponible restante</span>
+        </div>
+        <!-- Stacked bar -->
+        <div class="bar-track" style="height:20px;background:var(--gray2);border-radius:6px;overflow:hidden;display:flex">
+          <div id="tr-exec-bar"  style="height:100%;background:#185FA5;transition:width .4s;border-radius:0"></div>
+          <div id="tr-sub-bar"   style="height:100%;background:#FF6F00;opacity:0.85;transition:width .4s"></div>
+        </div>
+        <!-- Labels -->
+        <div style="display:flex;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:6px">
+          <div style="font-size:11px">
+            <span style="color:#185FA5;font-weight:700" id="tr-exec-lbl">—</span>
+            <span style="color:var(--textS)"> ejecutado </span>
+            <span style="color:#185FA5;font-weight:600" id="tr-exec-pct"></span>
+          </div>
+          <div style="font-size:11px">
+            <span style="color:#FF6F00;font-weight:700" id="tr-sub-lbl">—</span>
+            <span style="color:var(--textS)"> proyectado sem. </span>
+            <span style="color:#FF6F00;font-weight:600" id="tr-sub-pct"></span>
+          </div>
+          <div style="font-size:11px">
+            <span style="color:var(--textS)">Total utilizado: </span>
+            <span style="font-weight:700;color:var(--navy)" id="tr-total-pct">—</span>
+            <span style="color:var(--textS)"> del techo</span>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:6px">
+          <div style="font-size:10px;color:var(--textS)">&#9654; ene 2026 · RD$0M</div>
+          <div style="font-size:10px;color:var(--textS)">Techo: RD$13,748M &#9664;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Historial de seguimiento diario</div>
+      <div style="overflow-x:auto;margin-top:10px">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>WTI ($/bbl)</th>
+              <th>Sub. Semanal (RD$M)</th>
+              <th>Ejec. Acum. (RD$M)</th>
+              <th>Restante (RD$M)</th>
+              <th>Semanas</th>
+              <th>Escenario</th>
+            </tr>
+          </thead>
+          <tbody id="tr-history-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /tab-tracking -->
+
 </main>
 
 <footer class="page-footer">
-  MICM — Ministerio de Industria, Comercio y Mipymes · Análisis de Escenarios de Combustibles RD 2026 · Confidencial · Uso interno · 22 de marzo de 2026 · Elaborado por: Jorge Sánchez Erazo
+  MICM — Ministerio de Industria, Comercio y Mipymes · Análisis de Escenarios de Combustibles RD 2026 · Confidencial · Uso interno · Elaborado por: Jorge Sánchez Erazo <a href="https://x.com/jsanchezerazo" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;color:var(--blueL);text-decoration:none;vertical-align:middle"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 1200 1227" fill="currentColor" style="flex-shrink:0"><path d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284zM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854z"/></svg>@jsanchezerazo</a>
 </footer>
 
 <script>
@@ -485,6 +643,137 @@ function updateZonesChart(currentWTI){
 
 setScenario('base');
 buildCorrChart();
+
+// ── TRACKING DATA ──────────────────────────────────────────────────────────────
+// Cada día el script de automatización agrega una entrada aquí.
+// Formato: { date:"YYYY-MM-DD", wti:Number, subWk:Number, execCum:Number, scenario:"base"|"alivio"|"escalada" }
+const TRACKING_DATA = [
+  { date:"2026-03-21", wti:95.55, subWk:1279, execCum:5583, scenario:"base" },
+  { date:"2026-03-22", wti:95.55, subWk:1279, execCum:5583, scenario:"base" }
+];
+
+const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+function fmtDateES(isoDate) {
+  const [y,m,d] = isoDate.split('-');
+  return parseInt(d)+' de '+MESES_ES[parseInt(m)-1]+' de '+y;
+}
+function scenarioFromWTI(wti) {
+  if (wti <= 80)  return 'alivio';
+  if (wti <= 110) return 'base';
+  return 'escalada';
+}
+const SCENARIO_META = {
+  alivio:   { label:'Escenario Alivio',   dot:'#2E7D32', bg:'#E8F5E9', col:'#1B5E20',
+    ctx:'<strong>Escenario alivio (WTI &le;$80):</strong> Precio en zona de estabilidad fiscal. El subsidio semanal est&aacute; por debajo del promedio presupuestado. El presupuesto alcanza todo 2026 con margen. No se requieren reasignaciones urgentes.' },
+  base:     { label:'Escenario Base',     dot:'#185FA5', bg:'#E3F2FD', col:'#0D47A1',
+    ctx:'<strong>Escenario base (WTI $81–110):</strong> Presi&oacute;n moderada sobre el presupuesto. El subsidio semanal supera el promedio presupuestado. Se requiere reasignaci&oacute;n en los pr&oacute;ximos meses para cubrir el resto del a&ntilde;o sin ajuste de precios al consumidor.' },
+  escalada: { label:'Escenario Escalada', dot:'#A32D2D', bg:'#FFEBEE', col:'#B71C1C',
+    ctx:'<strong>Escenario escalada (WTI &gt;$110):</strong> ZONA CR&Iacute;TICA. El subsidio semanal compromete severamente el presupuesto. Sin decisi&oacute;n pol&iacute;tica urgente (reasignaci&oacute;n o ajuste de precios) el presupuesto colapsar&aacute; en semanas.' }
+};
+
+function renderTracking() {
+  if (!TRACKING_DATA.length) return;
+  const latest = TRACKING_DATA[TRACKING_DATA.length - 1];
+  const { date, wti, subWk, execCum } = latest;
+  const sc = scenarioFromWTI(wti);
+  const meta = SCENARIO_META[sc];
+  const remaining = BUDGET - execCum;
+  const weeks = subWk > 0 ? Math.min(Math.floor(remaining / subWk), 99) : 99;
+  const pct = Math.min((execCum / BUDGET) * 100, 100).toFixed(1);
+
+  document.getElementById('tr-fecha-display').textContent = fmtDateES(date);
+
+  const wtiEl = document.getElementById('tr-wti');
+  wtiEl.textContent = '$'+wti+'/bbl';
+  wtiEl.style.color = meta.dot;
+  document.getElementById('tr-wti-d').textContent = wti>110?'ZONA CRÍTICA':wti>85?'Zona de presión':'Zona segura';
+
+  const subEl = document.getElementById('tr-sub');
+  subEl.textContent = 'RD$'+subWk.toLocaleString()+'M';
+  subEl.style.color = subWk>2000?'#A32D2D':subWk>800?'#FF6F00':'#2E7D32';
+
+  const restEl = document.getElementById('tr-rest');
+  restEl.textContent = 'RD$'+remaining.toLocaleString()+'M';
+  restEl.style.color = remaining<3000?'#A32D2D':remaining<8000?'#FF6F00':'#2E7D32';
+  document.getElementById('tr-rest-d').textContent = 'Techo RD$13,748M · Ejec. RD$'+execCum.toLocaleString()+'M';
+
+  const wkEl = document.getElementById('tr-weeks');
+  wkEl.textContent = weeks>=99?'Todo 2026':weeks+' sem.';
+  wkEl.style.color = weeks>=20?'#2E7D32':weeks>=8?'#FF6F00':'#A32D2D';
+  document.getElementById('tr-weeks-d').textContent = weeks>=99?'Presupuesto suficiente para el año':weeks<5?'Quiebre inminente — decisión urgente':'Semanas restantes al ritmo actual';
+
+  // Rich analytical context
+  const remaining2 = BUDGET - execCum;
+  const weeks2 = subWk > 0 ? Math.min(Math.floor(remaining2 / subWk), 99) : 99;
+  const breakMonth = (() => {
+    if (weeks2 >= 99) return 'todo 2026';
+    const months = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    const d = new Date(date + 'T00:00:00');
+    d.setDate(d.getDate() + weeks2 * 7);
+    return months[d.getMonth()] + ' ' + d.getFullYear();
+  })();
+  const scRange = {alivio:'$65–$80',base:'$81–$110',escalada:'$111–$140+'}[sc];
+  const semColor = weeks2 < 5 ? '#B71C1C' : weeks2 < 10 ? '#E65100' : '#1B5E20';
+  const ctxHTML = `<strong>Corte: ${fmtDateES(date)} · Escenario ${meta.label} (WTI ${scRange}/bbl)</strong><br>` +
+    `Con WTI a <strong>$${wti}/bbl</strong>, el mercado se ubica en el ` +
+    `<strong style="color:${meta.dot}">${meta.label}</strong>. ` +
+    (sc === 'alivio'
+      ? `El subsidio semanal estimado cae a <strong>RD$${subWk.toLocaleString()}M</strong>, por debajo del promedio presupuestado. ` +
+        `El presupuesto disponible (RD$${remaining2.toLocaleString()}M) es suficiente para sostener los subsidios ` +
+        `<strong style="color:#2E7D32">durante todo el 2026</strong> sin reasignación. Zona de estabilidad fiscal.`
+      : sc === 'base'
+      ? `El subsidio semanal estimado es <strong>RD$${subWk.toLocaleString()}M</strong>, presionando el presupuesto por encima del ritmo inicial. ` +
+        `Con RD$${remaining2.toLocaleString()}M disponibles, el presupuesto se agota en ` +
+        `<strong style="color:${semColor}">${weeks2} semanas</strong> (quiebre estimado: <strong>${breakMonth}</strong>). ` +
+        ``
+      : `ALERTA CRÍTICA: El subsidio semanal proyectado es <strong>RD$${subWk.toLocaleString()}M</strong>. ` +
+        `Con RD$${remaining2.toLocaleString()}M disponibles, el presupuesto colapsa en ` +
+        `<strong style="color:#B71C1C">${weeks2} semanas</strong> (quiebre estimado: <strong>${breakMonth}</strong>). ` +
+        `Se requiere <strong>decisión política urgente</strong>: reasignación presupuestal y/o ajuste de precios al consumidor.`) +
+    ` <em style="color:var(--textS);font-size:10px">Fuente: EIA STEO · IEA Oil Market Report · Análisis MICM 2026.</em>`;
+  document.getElementById('tr-context').innerHTML = ctxHTML;
+  const subPct = Math.min((subWk / BUDGET) * 100, 100 - parseFloat(pct)).toFixed(1);
+  const totalPct = (parseFloat(pct) + parseFloat(subPct)).toFixed(1);
+  document.getElementById('tr-exec-bar').style.width  = pct+'%';
+  document.getElementById('tr-sub-bar').style.width   = subPct+'%';
+  document.getElementById('tr-exec-lbl').textContent  = 'RD$'+execCum.toLocaleString()+'M';
+  document.getElementById('tr-exec-pct').textContent  = '('+pct+'%)';
+  document.getElementById('tr-sub-lbl').textContent   = 'RD$'+subWk.toLocaleString()+'M';
+  document.getElementById('tr-sub-pct').textContent   = '('+subPct+'%)';
+  document.getElementById('tr-total-pct').textContent = totalPct+'%';
+
+  const tbody = document.getElementById('tr-history-body');
+  tbody.innerHTML = '';
+  [...TRACKING_DATA].reverse().forEach(row => {
+    const r = scenarioFromWTI(row.wti);
+    const rem = BUDGET - row.execCum;
+    const wk = row.subWk>0?Math.min(Math.floor(rem/row.subWk),99):99;
+    const scLabel = {alivio:'Alivio',base:'Base',escalada:'Escalada'}[r];
+    tbody.innerHTML += `<tr>
+      <td>${fmtDateES(row.date)}</td>
+      <td style="font-weight:700;color:${SCENARIO_META[r].dot}">$${row.wti}</td>
+      <td>RD$${row.subWk.toLocaleString()}M</td>
+      <td>RD$${row.execCum.toLocaleString()}M</td>
+      <td>RD$${rem.toLocaleString()}M</td>
+      <td style="font-weight:700;color:${wk<8?'#A32D2D':wk<20?'#FF6F00':'#2E7D32'}">${wk>=99?'Todo 2026':wk+' sem.'}</td>
+      <td><span class="sce-pill sce-${r}">${scLabel}</span></td>
+    </tr>`;
+  });
+}
+
+// ── TAB SWITCHER ───────────────────────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.getAttribute('onclick') === "switchTab('"+name+"')") b.classList.add('active');
+  });
+  if (name === 'tracking') renderTracking();
+}
+
+renderTracking();
+
 </script>
 </body>
 </html>
