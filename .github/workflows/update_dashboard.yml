@@ -1,0 +1,33 @@
+name: Actualizacion Diaria Dashboard Combustibles RD
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Actualizar dashboard
+        run: python update_dashboard.py
+        env:
+          TZ: America/Santo_Domingo
+
+      - name: Commit y push si hay cambios
+        run: |
+          git config user.email "bot@micm-dashboard.com"
+          git config user.name "Dashboard Bot MICM"
+          git add index.html
+          git diff --staged --quiet && echo "Sin cambios" || (git commit -m "[auto] $(TZ='America/Santo_Domingo' date '+%Y-%m-%d %H:%M') - Actualizacion diaria WTI" && git push)
