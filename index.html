@@ -232,6 +232,53 @@
   .sce-escalada{ background: var(--redL);    color: #B71C1C; }
   .sce-custom  { background: var(--purpleL); color: #26215C; }
 
+
+  /* ── REGIONAL TAB ── */
+  .flag-img { vertical-align:middle; margin-right:6px; border-radius:2px; }
+  .subtab-nav { display:flex; gap:4px; margin-bottom:18px; border-bottom:2px solid var(--gray2); padding-bottom:0; }
+  .subtab-btn { background:none; border:none; border-bottom:3px solid transparent; padding:10px 18px; cursor:pointer; font-size:13px; font-weight:500; color:var(--navy); opacity:.6; transition:all .2s; margin-bottom:-2px; font-family:'Montserrat','Segoe UI',sans-serif; }
+  .subtab-btn:hover { opacity:1; }
+  .subtab-btn.active { opacity:1; color:var(--blue); border-bottom-color:var(--blue); }
+  .subtab-pane { display:none; }
+  .subtab-pane.active { display:block; }
+  .regional-table { width:100%; border-collapse:collapse; font-size:11.5px; }
+  .regional-table thead th { background:var(--navy); color:var(--white); padding:9px 10px; text-align:left; font-weight:600; }
+  .regional-table thead th:first-child { border-radius:8px 0 0 0; }
+  .regional-table thead th:last-child  { border-radius:0 8px 0 0; }
+  .regional-table tbody tr:nth-child(even) { background:var(--gray1); }
+  .regional-table tbody tr:hover { background:var(--blueXL); }
+  .regional-table tbody td { padding:7px 10px; color:var(--navy); border-bottom:.5px solid var(--gray2); vertical-align:middle; }
+  .regional-table tbody tr.rd-row { background:rgba(21,101,192,.10); }
+  .regional-table tbody tr.rd-row td { font-weight:700; }
+  .badge { display:inline-block; font-size:10px; font-weight:700; padding:2px 7px; border-radius:20px; white-space:nowrap; }
+  .badge-prod    { background:#E8F5E9; color:#2E7D32; }
+  .badge-noprod  { background:#FFF3E0; color:#E65100; }
+  .badge-sub     { background:#E3F2FD; color:#1565C0; }
+  .badge-nosub   { background:#F5F5F5; color:#9E9E9E; border:1px solid #E0E0E0; }
+  .badge-changed { background:#FFEBEE; color:var(--red); }
+  .chg-up   { color:var(--red); font-weight:700; }
+  .chg-down { color:var(--green); font-weight:700; }
+  .chg-zero { color:#9E9E9E; font-weight:600; }
+  .ranking-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px; }
+  @media(max-width:640px){ .ranking-grid { grid-template-columns:1fr; } }
+  .ranking-card { background:var(--white); border:1px solid var(--gray2); border-radius:10px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+  .ranking-card-header { background:var(--navy); color:var(--white); padding:10px 14px; font-size:12px; font-weight:700; }
+  .ranking-item { display:flex; align-items:center; gap:10px; padding:8px 14px; border-bottom:.5px solid var(--gray2); font-size:12px; }
+  .ranking-item:last-child { border-bottom:none; }
+  .rank-num     { font-size:15px; font-weight:900; color:var(--navy); width:22px; text-align:center; }
+  .rank-flag    { display:flex; align-items:center; }
+  .rank-country { flex:1; font-weight:600; color:var(--navy); }
+  .rank-val     { font-weight:700; font-size:13px; }
+  .rd-ref-box   { margin-top:12px; padding:10px 14px; background:rgba(21,101,192,.07); border-radius:8px; font-size:11.5px; color:var(--navy); }
+  .narrative-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px; }
+  @media(max-width:640px){ .narrative-grid { grid-template-columns:1fr; } }
+  .narrative-card { background:var(--white); border:1px solid var(--gray2); border-radius:10px; padding:13px; }
+  .narrative-card.narrative-changed { border-left:3px solid var(--red); }
+  .narrative-card-header { display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; }
+  .narrative-country { font-weight:700; font-size:13px; color:var(--navy); }
+  .narrative-meta    { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:8px; }
+  .narrative-text    { font-size:11.5px; color:var(--navy); line-height:1.65; }
+  .source-note { font-size:10px; color:#9E9E9E; margin-top:14px; text-align:right; }
 </style>
 </head>
 <body>
@@ -262,6 +309,7 @@
   <div class="tab-nav">
     <button class="tab-btn active" onclick="switchTab('escenarios')">&#128202; An&#225;lisis de Escenarios</button>
     <button class="tab-btn" onclick="switchTab('tracking')">&#128200; Seguimiento Diario</button>
+    <button class="tab-btn" onclick="switchTab('regional')">&#127758; Contexto Regional</button>
   </div>
   <!-- TAB 1: ESCENARIOS -->
   <div id="tab-escenarios" class="tab-pane active">
@@ -484,6 +532,18 @@
 
   </div><!-- /tab-tracking -->
 
+  <div id="tab-regional" class="tab-pane">
+    <div class="section-label">Contexto Regional — Gasolina Regular en Latinoamérica</div>
+    <div class="subtab-nav">
+      <button class="subtab-btn active" onclick="switchSub('comparativa')">&#128202; Comparativa</button>
+      <button class="subtab-btn" onclick="switchSub('ranking')">&#127942; Ranking</button>
+      <button class="subtab-btn" onclick="switchSub('narrativa')">&#128172; Narrativa Oficial</button>
+    </div>
+    <div id="subtab-comparativa" class="subtab-pane active"><div id="reg-table"></div></div>
+    <div id="subtab-ranking"     class="subtab-pane"><div id="reg-ranking"></div></div>
+    <div id="subtab-narrativa"   class="subtab-pane"><div id="reg-narrativa"></div></div>
+  </div><!-- /tab-regional -->
+
 </main>
 
 <footer class="page-footer">
@@ -652,22 +712,18 @@ const TRACKING_DATA = [
   { date:"2026-03-22", wti:95.55, subWk:1279, execCum:5583, scenario:"base" },
   { date:"2026-03-23", wti:89.36, subWk:1001, execCum:5583, scenario:"base" },
   { date:"2026-03-24", wti:91.92, subWk:1116, execCum:5583, scenario:"base" },
-  { date:"2026-03-25", wti:88.31, subWk:954, execCum:5583, scenario:"base" },
+  { date:"2026-03-25", wti:88.31, subWk:954,  execCum:5583, scenario:"base" },
   { date:"2026-03-26", wti:94.13, subWk:1215, execCum:5583, scenario:"base" },
-  { date:"2026-03-27", wti:96.8, subWk:1682, execCum:6872, scenario:"base" },
+  { date:"2026-03-27", wti:96.8,   subWk:1682, execCum:6872, scenario:"base" },
   { date:"2026-03-28", wti:99.64, subWk:1682, execCum:6872, scenario:"base" },
   { date:"2026-03-29", wti:99.64, subWk:1462, execCum:6872, scenario:"base" },
   { date:"2026-03-30", wti:100.6, subWk:1505, execCum:6872, scenario:"base" },
-  { date:"2026-03-31", wti:103.19, subWk:1621, execCum:6872, scenario:"base" },
-  { date:"2026-04-01", wti:100.85, subWk:1516, execCum:6872, scenario:"base" },
-  { date:"2026-04-02", wti:113.16, subWk:2068, execCum:6872, scenario:"escalada" },
-  { date:"2026-04-03", wti:111.54, subWk:1995, execCum:6872, scenario:"escalada" },
-  { date:"2026-04-04", wti:111.54, subWk:1995, execCum:8784, scenario:"escalada" },
-  { date:"2026-04-05", wti:112.06, subWk:2018, execCum:8784, scenario:"escalada" },
-  { date:"2026-04-06", wti:110.32, subWk:1940, execCum:8784, scenario:"escalada" },
-  { date:"2026-04-07", wti:114.73, subWk:2138, execCum:8784, scenario:"escalada" },
-  { date:"2026-04-08", wti:92.65, subWk:1149, execCum:8784, scenario:"base" },
-  { date:"2026-04-09", wti:99.54, subWk:1457, execCum:8784, scenario:"base" }
+  { date:"2026-03-31", wti:103.19,subWk:1621, execCum:6872, scenario:"base" },
+  { date:"2026-04-01", wti:100.85,subWk:1516, execCum:6872, scenario:"base" },
+  { date:"2026-04-02", wti:113.16,subWk:2068, execCum:6872, scenario:"escalada" },
+  { date:"2026-04-03", wti:111.54,subWk:1995, execCum:6872, scenario:"escalada" },
+  { date:"2026-04-04", wti:111.54,subWk:1995, execCum:8784, scenario:"escalada" },
+  { date:"2026-04-05", wti:112.06,subWk:2018, execCum:8784, scenario:"escalada" }
 ];
 
 const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
@@ -791,6 +847,229 @@ function switchTab(name) {
 }
 
 renderTracking();
+
+// ─────────────────────────────────────────────────────────────
+//  DATOS REGIONALES — Gasolina Regular (USD/galón)
+//  1 galón = 3.785 litros | Fuente: GlobalPetrolPrices, OLADE,
+//  reguladores nacionales | Verificado: 09 abr 2026
+// ─────────────────────────────────────────────────────────────
+const REGIONAL_DATA = [
+  { pais:"México",      iso:"mx", tipo:"Productor",    subsidio:true,  subDesc:"Tope MXN 28/L vía IEPS",
+    ene:5.18, cur:6.11, prev:null, changed:false,
+    narrativa:"El gobierno anuncia que <strong>'la gasolina en México sigue siendo de las más accesibles de Latinoamérica'</strong> gracias al tope de precios vía mecanismo IEPS. La administración Sheinbaum presenta el control como política soberana frente a la especulación internacional y la expansión de la refinería Olmeca como garantía de abasto." },
+  { pais:"Guatemala",   iso:"gt", tipo:"No productor", subsidio:false, subDesc:null,
+    ene:3.52, cur:4.50, prev:null, changed:false,
+    narrativa:"El Ministerio de Energía y Minas informa el alza semanalmente como reflejo directo del precio internacional del petróleo. <strong>El gobierno no ofrece mecanismo de contención ni narrativa oficial de respuesta</strong> — el precio simplemente sube con el mercado." },
+  { pais:"Belice",      iso:"bz", tipo:"No productor", subsidio:false, subDesc:null,
+    ene:5.48, cur:5.60, prev:null, changed:false,
+    narrativa:"<strong>Sin comunicación oficial documentada sobre política de precios.</strong> El gobierno no ha anunciado medidas ante el alza internacional de combustibles." },
+  { pais:"Honduras",    iso:"hn", tipo:"No productor", subsidio:true,  subDesc:"Mecanismo limitado",
+    ene:4.17, cur:4.27, prev:null, changed:false,
+    narrativa:"El gobierno informa que mantiene un <strong>'mecanismo de compensación focalizado'</strong> para amortiguar el impacto al consumidor. Coordinación regional con El Salvador para medidas de estabilización — el alza se presenta como contenida respecto al mercado internacional." },
+  { pais:"El Salvador", iso:"sv", tipo:"No productor", subsidio:true,  subDesc:"Tope en diésel; apoyo ingreso bajo",
+    ene:3.56, cur:4.08, prev:null, changed:false,
+    narrativa:"Bukele comunica que <strong>'El Salvador tiene los combustibles más baratos de Centroamérica'</strong>. Cualquier alza se reencuadra como logro político relativo: aunque el precio suba, el argumento oficial es que el país sigue siendo el más competitivo de la región." },
+  { pais:"Nicaragua",   iso:"ni", tipo:"No productor", subsidio:true,  subDesc:"Tarifas subsidiadas pensionados",
+    ene:5.11, cur:5.11, prev:null, changed:false,
+    narrativa:"El gobierno de Ortega mantiene el precio congelado y destaca que <strong>'el pueblo nicaragüense no paga la crisis energética internacional'</strong>. La estabilidad de precios se presenta como logro de la revolución, con tarifas especiales para pensionados y población vulnerable." },
+  { pais:"Costa Rica",  iso:"cr", tipo:"No productor", subsidio:false, subDesc:null,
+    ene:4.74, cur:5.15, prev:null, changed:false,
+    narrativa:"La ARESEP fija los precios mediante metodología pública y técnica. El gobierno dice <strong>'el proceso es transparente y protege al consumidor mediante regulación independiente'</strong>. Los ajustes se comunican como resultados técnicos, no políticos." },
+  { pais:"Panamá",      iso:"pa", tipo:"No productor", subsidio:false, subDesc:null,
+    ene:2.95, cur:4.77, prev:null, changed:false,
+    narrativa:"El MICI informa ajustes de precio quincenales como resultado de la variación internacional del crudo. <strong>Sin narrativa oficial de intervención activa</strong>; el gobierno presenta los precios como reflejo de condiciones globales." },
+  { pais:"Cuba",        iso:"cu", tipo:"Productor",    subsidio:true,  subDesc:"Control total; racionamiento 20L",
+    ene:null, cur:null, prev:null, changed:false, nc:true,
+    narrativa:"El gobierno culpa al <strong>'bloqueo imperialista de EEUU'</strong> por la crisis de combustible. El racionamiento (20L/mes por persona) se presenta como <strong>'medida de resistencia soberana ante el cerco económico'</strong>. Precio no comparable con el mercado regional." },
+  { pais:"Haití",       iso:"ht", tipo:"No productor", subsidio:false, subDesc:null,
+    ene:4.24, cur:4.28, prev:null, changed:false,
+    narrativa:"Sin gobierno funcional con capacidad de comunicación oficial sobre precios. Los combustibles se distribuyen a través del mercado informal; <strong>no existe narrativa oficial de intervención ante el alza.</strong>" },
+  { pais:"Rep. Dom.",   iso:"do", tipo:"No productor", subsidio:true,  subDesc:"Absorción parcial; RD$1,912M sem.",
+    ene:4.59, cur:4.73, prev:null, changed:false, esRD:true,
+    narrativa:"<strong>'El Gobierno fortalece la protección de la economía familiar asumiendo el impacto de la volatilidad de los mercados petroleros con un subsidio de RD$1,912 millones.'</strong> El Presidente Abinader presenta el subsidio como escudo ante la crisis global — el gobierno absorbe el alza para que las familias no lo sientan." },
+  { pais:"Colombia",    iso:"co", tipo:"Productor",    subsidio:false, subDesc:null,
+    ene:4.49, cur:4.05, prev:null, changed:false,
+    narrativa:"El gobierno Petro enmarca el alza del IVA al combustible (10%→19%) como 'justicia fiscal y transición energética'. Dice: <strong>'quien más contamina, más paga; los recursos van a proteger a los más vulnerables'</strong>. El precio baja por el crudo pero sube por el impuesto." },
+  { pais:"Venezuela",   iso:"ve", tipo:"Productor",    subsidio:true,  subDesc:"Subsidio extremo; precio administrativo",
+    ene:0.04, cur:0.04, prev:null, changed:false, nc:true,
+    narrativa:"Maduro presenta el precio del combustible cercano a cero como <strong>'beneficio de la revolución bolivariana al pueblo'</strong>. Cualquier ajuste se encuadra como 'soberanía energética' frente a las sanciones. Precio artificialmente suprimido — no comparable con el mercado regional." },
+  { pais:"Ecuador",     iso:"ec", tipo:"Productor",    subsidio:false, subDesc:"Subsidios eliminados 2024–25",
+    ene:2.67, cur:2.31, prev:null, changed:false,
+    narrativa:"El gobierno Noboa dice: <strong>'los subsidios generalizados eran un mecanismo de corrupción que beneficiaba a los más ricos'</strong>. Con precio de mercado, el Estado puede invertir en quienes más lo necesitan. La eliminación del subsidio se comunica como medida de transparencia fiscal." },
+  { pais:"Perú",        iso:"pe", tipo:"Productor",    subsidio:false, subDesc:null,
+    ene:4.44, cur:3.75, prev:null, changed:false,
+    narrativa:"El Ministerio de Energía y Minas informa variaciones como reflejo del mercado internacional. <strong>Sin narrativa oficial de contención</strong> — el gobierno Boluarte no ha anunciado política activa de precio. La baja beneficia directamente al consumidor." },
+  { pais:"Bolivia",     iso:"bo", tipo:"Productor",    subsidio:false, subDesc:"Eliminado ene-2026",
+    ene:3.79, cur:3.79, prev:null, changed:false,
+    narrativa:"El gobierno justifica la eliminación del subsidio diciendo: <strong>'el ahorro de USD 10M/día permitirá reparar las finanzas del Estado e invertir en energía para las próximas generaciones'</strong>. El acuerdo con sindicatos de transporte incluye compensaciones focalizadas para los más vulnerables." },
+  { pais:"Chile",       iso:"cl", tipo:"No productor", subsidio:false, subDesc:null,
+    ene:4.93, cur:3.90, prev:null, changed:false,
+    narrativa:"El gobierno de Boric dice que <strong>'el MEPCO suaviza las variaciones bruscas, protegiendo el bolsillo de los chilenos'</strong>. Aunque los precios chilenos siguen entre los más altos de la región, el gobierno los atribuye a la carga tributaria que financia servicios públicos." },
+  { pais:"Argentina",   iso:"ar", tipo:"Productor",    subsidio:false, subDesc:null,
+    ene:4.39, cur:5.68, prev:null, changed:false,
+    narrativa:"El gobierno Milei dice: <strong>'el precio lo fija el mercado, no el Estado. La competencia entre empresas protege al consumidor mejor que cualquier subsidio'</strong>. El alza se atribuye a la 'herencia inflacionaria del peronismo' y la devaluación del peso, no a la política actual." },
+  { pais:"Uruguay",     iso:"uy", tipo:"No productor", subsidio:false, subDesc:null,
+    ene:7.56, cur:5.68, prev:null, changed:false,
+    narrativa:"ANCAP fija el precio mensualmente. El gobierno explica que <strong>'el precio incluye impuestos que financian infraestructura y servicios públicos de calidad'</strong>. Uruguay tiene los precios más altos de la región por diseño fiscal — sin disculpas ni promesas de reducción." },
+  { pais:"Paraguay",    iso:"py", tipo:"No productor", subsidio:false, subDesc:null,
+    ene:3.33, cur:3.94, prev:null, changed:false,
+    narrativa:"<strong>Sin comunicación proactiva oficial sobre precios.</strong> El MOPC informa ajustes como resultado del mercado internacional sin ofrecer mecanismo de intervención ni narrativa de contención." },
+  { pais:"Brasil",      iso:"br", tipo:"Productor",    subsidio:true,  subDesc:"Subsidio diésel R$0.32/L dic-26",
+    ene:4.77, cur:3.86, prev:null, changed:false,
+    narrativa:"El gobierno Lula dice: <strong>'mantenemos el subsidio al diésel hasta diciembre de 2026 para proteger el transporte y el costo de vida de los brasileños'</strong>. Petrobras fija el precio de la gasolina con paridad internacional moderada. La baja del crudo se traslada al consumidor." }
+];
+
+const REGIONAL_UPDATED = "09 abr 2026";
+
+function flagImg(iso, pais) {
+  return `<img src="https://flagcdn.com/20x15/${iso}.png" width="20" height="15" alt="" title="${pais}" class="flag-img">`;
+}
+
+function switchSub(name) {
+  document.querySelectorAll('.subtab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('subtab-' + name).classList.add('active');
+  document.querySelectorAll('.subtab-btn').forEach(b => {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + name + "'"))
+      b.classList.add('active');
+  });
+}
+
+function pctHtml(ene, cur) {
+  if (ene === null || cur === null) return '<span class="chg-zero">S/D</span>';
+  const p = (cur - ene) / ene * 100;
+  const s = p > 0 ? '+' : '';
+  const c = p > 1 ? 'chg-up' : p < -1 ? 'chg-down' : 'chg-zero';
+  return `<span class="${c}">${s}${p.toFixed(1)}%</span>`;
+}
+function fmt(v, nc) {
+  if (v === null) return '<span class="chg-zero">S/D</span>';
+  if (nc) return `<span class="chg-zero" title="No comparable">$${v.toFixed(2)}*</span>`;
+  return `$${v.toFixed(2)}`;
+}
+
+function renderTable() {
+  const tableData = REGIONAL_DATA
+    .filter(d => d.pais !== "Cuba" && d.pais !== "Venezuela")
+    .sort((a, b) => {
+      const pctA = (a.ene !== null && a.cur !== null) ? (a.cur - a.ene) / a.ene : null;
+      const pctB = (b.ene !== null && b.cur !== null) ? (b.cur - b.ene) / b.ene : null;
+      if (pctA === null && pctB === null) return 0;
+      if (pctA === null) return 1;
+      if (pctB === null) return -1;
+      return pctB - pctA;
+    });
+  const rows = tableData.map(d => {
+    const rdCls = d.esRD ? ' class="rd-row"' : '';
+    const tBadge = `<span class="badge ${d.tipo==='Productor'?'badge-prod':'badge-noprod'}">${d.tipo}</span>`;
+    const sBadge = d.subsidio
+      ? `<span class="badge badge-sub" title="${d.subDesc||'Sí'}">Subsidio &#10003;</span>`
+      : `<span class="badge badge-nosub">Sin subsidio</span>`;
+    const chgBadge = d.changed ? ' <span class="badge badge-changed">&#8593; Cambió</span>' : '';
+    const rdLabel = d.esRD ? '<strong>' : '';
+    const rdClose = d.esRD ? '</strong>' : '';
+    return `<tr${rdCls}>
+      <td>${flagImg(d.iso,d.pais)}${rdLabel}${d.pais}${rdClose}${chgBadge}</td>
+      <td>${tBadge}</td><td>${sBadge}</td>
+      <td style="text-align:right">${fmt(d.ene,false)}</td>
+      <td style="text-align:right">${fmt(d.cur,d.nc)}</td>
+      <td style="text-align:right">${pctHtml(d.ene,d.cur)}</td>
+    </tr>`;
+  }).join('');
+  const excNote = '<span style="color:#9E9E9E">Venezuela y Cuba aparecen en Narrativa Oficial — sus precios no son comparables con el mercado regional.</span>';
+  document.getElementById('reg-table').innerHTML = `
+    <p style="font-size:11px;color:#888;margin-bottom:8px">Gasolina regular · USD/galón (1 gal = 3.785 L) · Ordenado por variación % mayor a menor · ${excNote}</p>
+    <div style="overflow-x:auto">
+      <table class="regional-table">
+        <thead><tr><th>País</th><th>Tipo</th><th>Subsidio</th>
+          <th style="text-align:right">Ene 2026</th>
+          <th style="text-align:right">Actual</th>
+          <th style="text-align:right">Variación</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+    <p class="source-note">Fuente: GlobalPetrolPrices · OLADE · Reguladores nacionales · Verificado: ${REGIONAL_UPDATED}</p>`;
+}
+
+function renderRanking() {
+  const rankable   = REGIONAL_DATA.filter(d => d.cur !== null && !d.nc);
+  const withChange = rankable.filter(d => d.ene !== null);
+  const rdEntry    = REGIONAL_DATA.find(d => d.esRD) || { cur: 4.73 };
+  const top5exp   = [...rankable].sort((a,b) => b.cur-a.cur).slice(0,5);
+  const top5cheap = [...rankable].sort((a,b) => a.cur-b.cur).slice(0,5);
+  const top5inc   = [...withChange].filter(d=>d.cur>d.ene).sort((a,b)=>(b.cur-b.ene)/b.ene-(a.cur-a.ene)/a.ene).slice(0,5);
+  const top5dec   = [...withChange].filter(d=>d.cur<d.ene).sort((a,b)=>(a.cur-a.ene)/a.ene-(b.cur-b.ene)/b.ene).slice(0,5);
+  function buildCard(title, arr, valFn, cls) {
+    const items = arr.map((d,i) => {
+      const rdMark = d.esRD ? ' <span style="font-size:10px;color:var(--blue)">(RD)</span>' : '';
+      return `<div class="ranking-item">
+        <span class="rank-num">${i+1}</span>
+        <span class="rank-flag">${flagImg(d.iso,d.pais)}</span>
+        <span class="rank-country">${d.pais}${rdMark}</span>
+        <span class="rank-val ${cls}">${valFn(d)}</span>
+      </div>`;
+    }).join('');
+    return `<div class="ranking-card"><div class="ranking-card-header">${title}</div>${items||'<div style="padding:14px;font-size:12px;color:#aaa">Sin datos suficientes</div>'}</div>`;
+  }
+  document.getElementById('reg-ranking').innerHTML = `
+    <div class="ranking-grid">
+      ${buildCard('&#128308; Más caro — Actual (USD/gal)',top5exp,d=>'$'+d.cur.toFixed(2),'chg-up')}
+      ${buildCard('&#128994; Más barato — Actual (USD/gal)',top5cheap,d=>'$'+d.cur.toFixed(2),'chg-down')}
+      ${buildCard('&#11014;&#65039; Mayor alza desde enero',top5inc,d=>{const p=(d.cur-d.ene)/d.ene*100;return '+'+p.toFixed(1)+'%';},'chg-up')}
+      ${buildCard('&#11015;&#65039; Mayor baja desde enero',top5dec,d=>{const p=(d.cur-d.ene)/d.ene*100;return p.toFixed(1)+'%';},'chg-down')}
+    </div>
+    <div class="rd-ref-box">
+      <strong>Referencia Rep. Dom.:</strong> Gasolina regular
+      <strong style="color:var(--blue)">$${rdEntry.cur.toFixed(2)} USD/gal</strong>
+      (RD$${(rdEntry.cur*60.71).toFixed(0)}/gal · Tasa ref: RD$60.71)
+    </div>
+    <p class="source-note">Fuente: GlobalPetrolPrices · OLADE · Reguladores nacionales · Verificado: ${REGIONAL_UPDATED}</p>`;
+}
+
+function renderNarrativa() {
+  function sortByPct(arr) {
+    return [...arr].sort((a,b) => {
+      const pA = (a.ene!==null&&a.cur!==null)?(a.cur-a.ene)/a.ene:null;
+      const pB = (b.ene!==null&&b.cur!==null)?(b.cur-b.ene)/b.ene:null;
+      if (pA===null&&pB===null) return 0;
+      if (pA===null) return 1;
+      if (pB===null) return -1;
+      return pB-pA;
+    });
+  }
+  function buildCard(d) {
+    const tBadge = `<span class="badge ${d.tipo==='Productor'?'badge-prod':'badge-noprod'}">${d.tipo}</span>`;
+    const sBadge = d.subsidio
+      ? `<span class="badge badge-sub">${d.subDesc||'Subsidio activo'}</span>`
+      : `<span class="badge badge-nosub">Sin subsidio</span>`;
+    const pct = (d.ene!==null&&d.cur!==null)
+      ? `<span class="${(d.cur-d.ene)/d.ene>0.01?'chg-up':(d.cur-d.ene)/d.ene<-0.01?'chg-down':'chg-zero'}" style="font-size:11px;font-weight:700;margin-left:4px">${((d.cur-d.ene)/d.ene*100)>0?'+':''}${((d.cur-d.ene)/d.ene*100).toFixed(1)}%</span>`
+      : '';
+    const chgBadge = d.changed?'<span class="badge badge-changed" style="margin-left:6px">&#8593; Actualizado</span>':'';
+    const cardCls  = d.changed?'narrative-card narrative-changed':'narrative-card';
+    return `<div class="${cardCls}">
+      <div class="narrative-card-header">${flagImg(d.iso,d.pais)}<span class="narrative-country">${d.pais}</span>${pct}${chgBadge}</div>
+      <div class="narrative-meta">${tBadge} ${sBadge}</div>
+      <div class="narrative-text">${d.narrativa}</div>
+    </div>`;
+  }
+  const productores   = sortByPct(REGIONAL_DATA.filter(d=>d.tipo==='Productor'));
+  const noProductores = sortByPct(REGIONAL_DATA.filter(d=>d.tipo!=='Productor'));
+  const groupLabel = (txt,color) =>
+    `<div style="grid-column:1/-1;margin:6px 0 4px;padding:6px 10px;background:${color};border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);opacity:.8">${txt}</div>`;
+  document.getElementById('reg-narrativa').innerHTML = `
+    <div class="narrative-grid">
+      ${groupLabel('&#127981; Países Productores','var(--gray1)')}
+      ${productores.map(buildCard).join('')}
+      ${groupLabel('&#128666; Países No Productores','var(--gray1)')}
+      ${noProductores.map(buildCard).join('')}
+    </div>
+    <p class="source-note">Narrativas basadas en comunicados oficiales y medios regionales · Verificado: ${REGIONAL_UPDATED}</p>`;
+}
+
+renderTable();
+renderRanking();
+renderNarrativa();
 
 </script>
 </body>
