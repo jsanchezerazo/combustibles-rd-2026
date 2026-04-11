@@ -132,13 +132,18 @@ def scenario_from_wti(wti: float) -> str:
     return "escalada"
 
 
+def js_to_json(s: str) -> str:
+    """Convierte notación JavaScript (claves sin comillas) a JSON válido."""
+    return re.sub(r'([\{,])\s*([a-zA-Z_]\w*)\s*:', r'\1 "\2":', s)
+
+
 def get_last_tracking_data(html: str):
     """Extrae el último entry de TRACKING_DATA del HTML."""
     m = re.search(r'const TRACKING_DATA = (\[[\s\S]*?\]);', html)
     if not m:
         return None
     try:
-        data = json.loads(m.group(1))
+        data = json.loads(js_to_json(m.group(1)))
         return data[-1] if data else None
     except:
         return None
@@ -155,7 +160,7 @@ def update_tracking_entry(html: str, new_entry: dict) -> str:
         return html
 
     try:
-        data = json.loads(m.group(2))
+        data = json.loads(js_to_json(m.group(2)))
     except:
         data = []
 
