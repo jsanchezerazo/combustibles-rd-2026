@@ -75,6 +75,61 @@ REGIONAL_MAP = {
 # Países cuyo precio no es de mercado — se actualizan pero no se marcan 'changed'
 SKIP_CHANGED_FLAG = {"Cuba", "Venezuela"}
 
+# ── SANITY CHECK ──────────────────────────────────────────────────────────────
+# Máximo cambio diario permitido (fracción). Si GPP devuelve un precio que
+# difiere más de esto vs. el valor anterior, se rechaza y se reporta.
+MAX_DAILY_CHANGE = 0.25   # 25%
+
+# ── FALLBACK: EXCHANGE RATE API + PRECIOS LOCALES ─────────────────────────────
+# Cuando GPP falla o devuelve datos sospechosos, usamos precios en moneda local
+# (actualizados periódicamente) y los convertimos con tipos de cambio en vivo.
+#
+# Fuentes de precios locales (actualizar manualmente cada 1-2 semanas):
+#   - Ecuador: MICM / Primicias (ya en USD)
+#   - Perú: Osinergmin / Infobae
+#   - Chile: ENAP / Publimetro
+#   - Brasil: ANP / Petrobras
+#   - Uruguay: ANCAP / Bloomberg
+#   - Colombia: CREG / Infobae
+#   - Argentina: Surtidores.com.ar / Infobae
+#   - Paraguay: Petropar / ABC Color
+#   - México: Profeco / TV Azteca
+#   - Rep. Dom.: MICM / Diario Libre
+#   - Guatemala: MEM
+#   - Honduras: SEN
+#   - El Salvador: Minec
+#   - Bolivia: ANH
+#   - Costa Rica: ARESEP
+#
+# Formato: { pais: (precio_local_por_litro, moneda) }
+# Para países en USD (Ecuador, Panamá, El Salvador): precio ya en USD/galón
+LOCAL_PRICES = {
+    "Ecuador":     (0.799, "USD"),     # Extra $3.024/gal → $0.799/L (abr 12)
+    "Perú":        (5.58,  "PEN"),     # Promedio nacional (abr 11)
+    "Chile":       (1531,  "CLP"),     # 93-oct RM (abr 9)
+    "Uruguay":     (76.88, "UYU"),     # Súper 95 (mar-abr)
+    "Brasil":      (6.78,  "BRL"),     # Promedio nacional (abr 6)
+    "Colombia":    (4082,  "COP"),     # COP/litro promedio = 15,449/gal ÷ 3.785 (abr 1)
+    "Argentina":   (2145,  "ARS"),     # Premium 97-oct YPF CABA (mar)
+    "Paraguay":    (8240,  "PYG"),     # Premium 97-oct (abr 10)
+    "México":      (28.27, "MXN"),     # Premium promedio nacional (abr 6)
+    "Rep. Dom.":   (77.77, "DOP"),     # Regular RD$294.50/gal ÷ 3.785 (abr 12)
+    "Guatemala":   (1.329, "USD"),     # Regular $5.03/gal → $1.329/L (abr)
+    "Honduras":    (1.200, "USD"),     # Superior $4.54/gal → $1.200/L (abr)
+    "El Salvador": (1.134, "USD"),     # Superior $4.29/gal → $1.134/L (abr)
+    "Bolivia":     (6.96,  "BOB"),     # Especial (DS 5516, ene 2026)
+    "Costa Rica":  (867,   "CRC"),     # Regular ₡867/L estimado (abr)
+    "Panamá":      (1.261, "USD"),     # 95-oct $4.77/gal → $1.261/L (abr 3-17)
+    "Nicaragua":   (1.350, "USD"),     # Regular $5.11/gal → $1.350/L (congelado)
+    "Haití":       (1.131, "USD"),     # Regular $4.28/gal → $1.131/L
+}
+
+# Last update date for LOCAL_PRICES (para saber cuándo refrescar)
+LOCAL_PRICES_UPDATED = "2026-04-12"
+
+# Monedas que necesitan tipo de cambio (→ USD)
+CURRENCIES_NEEDED = {"PEN", "CLP", "UYU", "BRL", "COP", "ARS", "PYG", "MXN", "DOP", "BOB", "CRC"}
+
 
 # ── FUNCIONES AUXILIARES (WTI / TRACKING) ─────────────────────────────────────
 
@@ -203,6 +258,102 @@ def update_dates(html: str, dt: datetime) -> str:
         html
     )
     return html
+
+
+# ── FUNCIONES DE TIPO DE CAMBIO ───────────────────────────────────────────────
+
+def get_exchange_rates() -> dict:
+    """
+    Obtiene tipos de cambio USD → moneda desde APIs gratuitas.
+    Devuelve dict: { "PEN": 3.39, "CLP": 900, ... }
+    Si falla, devuelve dict vacío.
+    """
+    rates = {}
+
+    # Intento 1: exchangerate-api.com (free tier, 1500 req/mes)
+    try:
+        url = "https://open.er-api.com/v6/latest/USD"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+        if data.get("result") == "success":
+            all_rates = data["rates"]
+            for cur in CURRENCIES_NEEDED:
+                if cur in all_rates:
+                    rates[cur] = float(all_rates[cur])
+            print(f"  Tipos de cambio obtenidos: {len(rates)} monedas (er-api.com)")
+            return rates
+    except Exception as e:
+        print(f"  er-api.com falló: {e}")
+
+    # Intento 2: frankfurter.app (ECB data, gratuito, sin key)
+    try:
+        symbols = ",".join(CURRENCIES_NEEDED)
+        url = f"https://api.frankfurter.app/latest?from=USD&to={symbols}"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+        for cur, rate in data.get("rates", {}).items():
+            rates[cur] = float(rate)
+        if rates:
+            print(f"  Tipos de cambio obtenidos: {len(rates)} monedas (frankfurter.app)")
+            return rates
+    except Exception as e:
+        print(f"  frankfurter.app falló: {e}")
+
+    print("  ADVERTENCIA: No se pudieron obtener tipos de cambio.")
+    return rates
+
+
+def compute_fallback_prices(exchange_rates: dict) -> dict:
+    """
+    Calcula precios USD/galón usando LOCAL_PRICES + exchange_rates.
+    Solo para países donde tenemos precio local Y tipo de cambio.
+    """
+    fallback = {}
+    for pais, (local_price, currency) in LOCAL_PRICES.items():
+        if currency == "USD":
+            # Ya en USD/litro → convertir a galón
+            fallback[pais] = round(local_price * LITERS_PER_GALLON, 2)
+        elif currency in exchange_rates and exchange_rates[currency] > 0:
+            usd_per_liter = local_price / exchange_rates[currency]
+            fallback[pais] = round(usd_per_liter * LITERS_PER_GALLON, 2)
+        else:
+            print(f"  Sin TC para {pais} ({currency}) — omitido del fallback")
+    return fallback
+
+
+def sanity_check_prices(new_prices: dict, html: str) -> tuple:
+    """
+    Valida precios nuevos contra los actuales en el HTML.
+    Devuelve (accepted, rejected) donde cada uno es dict {pais: price}.
+    rejected incluye el motivo.
+    """
+    accepted = {}
+    rejected = {}
+
+    for pais, new_price in new_prices.items():
+        old_price = get_current_regional_cur(html, pais)
+
+        # Si no hay precio anterior, aceptar (primera carga)
+        if old_price is None or old_price == 0:
+            accepted[pais] = new_price
+            continue
+
+        # Calcular cambio porcentual
+        pct_change = abs(new_price - old_price) / old_price
+
+        if pct_change > MAX_DAILY_CHANGE:
+            rejected[pais] = {
+                "new": new_price,
+                "old": old_price,
+                "pct": pct_change * 100,
+                "reason": f"Cambio de {pct_change*100:.1f}% excede límite de {MAX_DAILY_CHANGE*100:.0f}%"
+            }
+        else:
+            accepted[pais] = new_price
+
+    return accepted, rejected
 
 
 # ── FUNCIONES REGIONALES ───────────────────────────────────────────────────────
@@ -445,8 +596,58 @@ def main():
     html = update_tracking_entry(html, new_entry)
 
     # ── 2. Precios regionales ───────────────────────────────────────────────────
-    print("\n[2/3] Precios regionales (GlobalPetrolPrices)...")
-    regional_prices = get_regional_prices()
+    print("\n[2/3] Precios regionales...")
+
+    # 2a. Fuente primaria: GlobalPetrolPrices
+    print("  [GPP] Obteniendo de GlobalPetrolPrices...")
+    gpp_prices = get_regional_prices()
+
+    # 2b. Fuente fallback: precios locales + tipos de cambio
+    print("  [Fallback] Obteniendo tipos de cambio...")
+    exchange_rates = get_exchange_rates()
+    fallback_prices = compute_fallback_prices(exchange_rates)
+    if fallback_prices:
+        print(f"  [Fallback] {len(fallback_prices)} precios calculados desde fuentes locales")
+
+    # 2c. Sanity check sobre datos de GPP
+    if gpp_prices:
+        accepted_gpp, rejected_gpp = sanity_check_prices(gpp_prices, html)
+        if rejected_gpp:
+            print(f"\n  ⚠️  PRECIOS GPP RECHAZADOS POR SANITY CHECK ({len(rejected_gpp)}):")
+            for pais, info in rejected_gpp.items():
+                print(f"     {pais}: ${info['old']:.2f} → ${info['new']:.2f} "
+                      f"({info['pct']:+.1f}%) — {info['reason']}")
+
+                # Intentar reemplazar con fallback
+                if pais in fallback_prices:
+                    fb_price = fallback_prices[pais]
+                    fb_pct = abs(fb_price - info['old']) / info['old'] * 100
+                    print(f"       → Fallback disponible: ${fb_price:.2f} ({fb_pct:+.1f}%)")
+                    if fb_pct <= MAX_DAILY_CHANGE * 100:
+                        accepted_gpp[pais] = fb_price
+                        print(f"       → ✓ Usando fallback")
+                    else:
+                        print(f"       → ✗ Fallback también excede límite. Manteniendo precio anterior.")
+                else:
+                    print(f"       → Sin fallback. Manteniendo precio anterior.")
+
+        regional_prices = accepted_gpp
+        print(f"\n  Resumen: {len(accepted_gpp)} aceptados, {len(rejected_gpp)} rechazados")
+    else:
+        # GPP falló completamente → usar fallback
+        print("  GPP no disponible. Usando fallback (precios locales + TC)...")
+        if fallback_prices:
+            accepted_fb, rejected_fb = sanity_check_prices(fallback_prices, html)
+            if rejected_fb:
+                print(f"  ⚠️  Fallback rechazados: {len(rejected_fb)}")
+                for pais, info in rejected_fb.items():
+                    print(f"     {pais}: ${info['old']:.2f} → ${info['new']:.2f} "
+                          f"({info['pct']:+.1f}%)")
+            regional_prices = accepted_fb
+        else:
+            regional_prices = {}
+            print("  ⚠️  Sin datos de GPP ni fallback. Precios regionales NO actualizados.")
+
     date_label = f"{now_rd.day:02d} {MESES_ES[now_rd.month-1][:3]} {now_rd.year}"
     html = apply_regional_updates(html, regional_prices, is_monday, date_label)
 
