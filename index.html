@@ -736,7 +736,8 @@ const TRACKING_DATA = [
   { date:"2026-04-15", wti:91.34, subWk:1090, execCum:10577, scenario:"base" },
   { date:"2026-04-16", wti:89.29, subWk:998, execCum:10577, scenario:"base" },
   { date:"2026-04-17", wti:82.49, subWk:693, execCum:10577, scenario:"base" },
-  { date:"2026-04-18", wti:83.85, subWk:754, execCum:10577, scenario:"base" }
+  { date:"2026-04-18", wti:83.85, subWk:754, execCum:10577, scenario:"base" },
+  { date:"2026-04-19", wti:82.59, subWk:698, execCum:10577, scenario:"base" }
 ];
 
 const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
@@ -910,7 +911,7 @@ const REGIONAL_DATA = [
     ene:2.67, cur:3.02, prev:null, changed:false,
     narrativa:"El gobierno Noboa dice: <strong>'los subsidios generalizados eran un mecanismo de corrupción que beneficiaba a los más ricos'</strong>. Con precio de mercado, el Estado puede invertir en quienes más lo necesitan. La eliminación del subsidio se comunica como medida de transparencia fiscal." },
   { pais:"Perú",        iso:"pe", tipo:"Productor",    subsidio:false, subDesc:null,
-    ene:4.44, cur:6.15, prev:null, changed:true,
+    ene:4.44, cur:6.16, prev:null, changed:true,
     narrativa:"El Ministerio de Energía y Minas informa variaciones como reflejo del mercado internacional. <strong>Sin narrativa oficial de contención</strong> — el gobierno Boluarte no ha anunciado política activa de precio ante un alza de +40% desde enero, una de las mayores de la región." },
   { pais:"Bolivia",     iso:"bo", tipo:"Productor",    subsidio:false, subDesc:"Eliminado ene-2026",
     ene:3.79, cur:3.81, prev:null, changed:true,
@@ -932,7 +933,7 @@ const REGIONAL_DATA = [
     narrativa:"El gobierno Lula dice: <strong>'mantenemos el subsidio al diésel hasta diciembre de 2026 para proteger el transporte y el costo de vida de los brasileños'</strong>. Petrobras fija el precio de la gasolina con paridad internacional moderada. Con el WTI en ~$103/bbl, el alza del crudo se ha trasladado parcialmente al consumidor (+7% desde enero)." }
 ];
 
-const REGIONAL_UPDATED = "18 abr 2026";
+const REGIONAL_UPDATED = "19 abr 2026";
 
 function flagImg(iso, pais) {
   return `<img src="https://flagcdn.com/20x15/${iso}.png" width="20" height="15" alt="" title="${pais}" class="flag-img">`;
