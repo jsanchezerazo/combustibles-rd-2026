@@ -743,7 +743,8 @@ const TRACKING_DATA = [
   { date:"2026-04-22", wti:91.43, subWk:1094, execCum:10577, scenario:"base" },
   { date:"2026-04-23", wti:93.68, subWk:1195, execCum:10577, scenario:"base" },
   { date:"2026-04-24", wti:95.46, subWk:1275, execCum:10577, scenario:"base" },
-  { date:"2026-04-25", wti:94.4, subWk:1227, execCum:10577, scenario:"base" }
+  { date:"2026-04-25", wti:94.4, subWk:1227, execCum:10577, scenario:"base" },
+  { date:"2026-04-26", wti:94.4, subWk:1227, execCum:10577, scenario:"base" }
 ];
 
 const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
@@ -923,7 +924,7 @@ const REGIONAL_DATA = [
     ene:3.79, cur:3.79, prev:null, changed:false,
     narrativa:"El gobierno justifica la eliminación del subsidio diciendo: <strong>'el ahorro de USD 10M/día permitirá reparar las finanzas del Estado e invertir en energía para las próximas generaciones'</strong>. El acuerdo con sindicatos de transporte incluye compensaciones focalizadas para los más vulnerables." },
   { pais:"Chile",       iso:"cl", tipo:"No productor", subsidio:false, subDesc:null,
-    ene:4.93, cur:6.46, prev:null, changed:false,
+    ene:4.93, cur:6.47, prev:null, changed:false,
     narrativa:"El gobierno de Boric dice que <strong>'el MEPCO suaviza las variaciones bruscas, protegiendo el bolsillo de los chilenos'</strong>. Aunque los precios chilenos siguen entre los más altos de la región, el gobierno los atribuye a la carga tributaria que financia servicios públicos." },
   { pais:"Argentina",   iso:"ar", tipo:"Productor",    subsidio:false, subDesc:null,
     ene:4.39, cur:5.81, prev:null, changed:false,
@@ -932,14 +933,14 @@ const REGIONAL_DATA = [
     ene:7.56, cur:7.3, prev:null, changed:true,
     narrativa:"ANCAP fija el precio mensualmente. El gobierno explica que <strong>'el precio incluye impuestos que financian infraestructura y servicios públicos de calidad'</strong>. Uruguay tiene los precios más altos de la región por diseño fiscal — sin disculpas ni promesas de reducción." },
   { pais:"Paraguay",    iso:"py", tipo:"No productor", subsidio:false, subDesc:null,
-    ene:3.33, cur:4.93, prev:null, changed:false,
+    ene:3.33, cur:4.92, prev:null, changed:false,
     narrativa:"<strong>Sin comunicación proactiva oficial sobre precios.</strong> El MOPC informa ajustes como resultado del mercado internacional sin ofrecer mecanismo de intervención ni narrativa de contención." },
   { pais:"Brasil",      iso:"br", tipo:"Productor",    subsidio:true,  subDesc:"Subsidio diésel R$0.32/L dic-26",
     ene:4.77, cur:5.12, prev:null, changed:false,
     narrativa:"El gobierno Lula dice: <strong>'mantenemos el subsidio al diésel hasta diciembre de 2026 para proteger el transporte y el costo de vida de los brasileños'</strong>. Petrobras fija el precio de la gasolina con paridad internacional moderada. Con el WTI en ~$103/bbl, el alza del crudo se ha trasladado parcialmente al consumidor (+7% desde enero)." }
 ];
 
-const REGIONAL_UPDATED = "25 abr 2026";
+const REGIONAL_UPDATED = "26 abr 2026";
 
 function flagImg(iso, pais) {
   return `<img src="https://flagcdn.com/20x15/${iso}.png" width="20" height="15" alt="" title="${pais}" class="flag-img">`;
