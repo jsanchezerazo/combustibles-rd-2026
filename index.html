@@ -751,7 +751,8 @@ const TRACKING_DATA = [
   { date:"2026-05-01", wti:103.14, subWk:1619, execCum:10577, scenario:"base" },
   { date:"2026-05-02", wti:101.94, subWk:1565, execCum:10577, scenario:"base" },
   { date:"2026-05-03", wti:101.94, subWk:1565, execCum:10577, scenario:"base" },
-  { date:"2026-05-04", wti:102.34, subWk:1583, execCum:10577, scenario:"base" }
+  { date:"2026-05-04", wti:102.34, subWk:1583, execCum:10577, scenario:"base" },
+  { date:"2026-05-05", wti:102.54, subWk:1592, execCum:10577, scenario:"base" }
 ];
 
 const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
@@ -883,7 +884,7 @@ renderTracking();
 // ─────────────────────────────────────────────────────────────
 const REGIONAL_DATA = [
   { pais:"México",      iso:"mx", tipo:"Productor",    subsidio:true,  subDesc:"Tope MXN 28/L vía IEPS",
-    ene:5.18, cur:6.13, prev:null, changed:false,
+    ene:5.18, cur:6.12, prev:null, changed:false,
     narrativa:"El gobierno anuncia que <strong>'la gasolina en México sigue siendo de las más accesibles de Latinoamérica'</strong> gracias al tope de precios vía mecanismo IEPS. La administración Sheinbaum presenta el control como política soberana frente a la especulación internacional y la expansión de la refinería Olmeca como garantía de abasto." },
   { pais:"Guatemala",   iso:"gt", tipo:"No productor", subsidio:false, subDesc:null,
     ene:3.52, cur:5.03, prev:null, changed:false,
@@ -925,29 +926,29 @@ const REGIONAL_DATA = [
     ene:2.67, cur:3.02, prev:null, changed:false,
     narrativa:"El gobierno Noboa dice: <strong>'los subsidios generalizados eran un mecanismo de corrupción que beneficiaba a los más ricos'</strong>. Con precio de mercado, el Estado puede invertir en quienes más lo necesitan. La eliminación del subsidio se comunica como medida de transparencia fiscal." },
   { pais:"Perú",        iso:"pe", tipo:"Productor",    subsidio:false, subDesc:null,
-    ene:4.44, cur:6.02, prev:null, changed:false,
+    ene:4.44, cur:6.01, prev:null, changed:false,
     narrativa:"El Ministerio de Energía y Minas informa variaciones como reflejo del mercado internacional. <strong>Sin narrativa oficial de contención</strong> — el gobierno Boluarte no ha anunciado política activa de precio ante un alza de +40% desde enero, una de las mayores de la región." },
   { pais:"Bolivia",     iso:"bo", tipo:"Productor",    subsidio:false, subDesc:"Eliminado ene-2026",
-    ene:3.79, cur:3.81, prev:null, changed:true,
+    ene:3.79, cur:3.8, prev:null, changed:true,
     narrativa:"El gobierno justifica la eliminación del subsidio diciendo: <strong>'el ahorro de USD 10M/día permitirá reparar las finanzas del Estado e invertir en energía para las próximas generaciones'</strong>. El acuerdo con sindicatos de transporte incluye compensaciones focalizadas para los más vulnerables." },
   { pais:"Chile",       iso:"cl", tipo:"No productor", subsidio:false, subDesc:null,
-    ene:4.93, cur:6.43, prev:null, changed:true,
+    ene:4.93, cur:6.44, prev:null, changed:true,
     narrativa:"El gobierno de Boric dice que <strong>'el MEPCO suaviza las variaciones bruscas, protegiendo el bolsillo de los chilenos'</strong>. Aunque los precios chilenos siguen entre los más altos de la región, el gobierno los atribuye a la carga tributaria que financia servicios públicos." },
   { pais:"Argentina",   iso:"ar", tipo:"Productor",    subsidio:false, subDesc:null,
-    ene:4.39, cur:5.88, prev:null, changed:false,
+    ene:4.39, cur:5.81, prev:null, changed:false,
     narrativa:"El gobierno Milei dice: <strong>'el precio lo fija el mercado, no el Estado. La competencia entre empresas protege al consumidor mejor que cualquier subsidio'</strong>. El alza se atribuye a la 'herencia inflacionaria del peronismo' y la devaluación del peso, no a la política actual." },
   { pais:"Uruguay",     iso:"uy", tipo:"No productor", subsidio:false, subDesc:null,
     ene:7.56, cur:7.22, prev:null, changed:true,
     narrativa:"ANCAP fija el precio mensualmente. El gobierno explica que <strong>'el precio incluye impuestos que financian infraestructura y servicios públicos de calidad'</strong>. Uruguay tiene los precios más altos de la región por diseño fiscal — sin disculpas ni promesas de reducción." },
   { pais:"Paraguay",    iso:"py", tipo:"No productor", subsidio:false, subDesc:null,
-    ene:3.33, cur:4.96, prev:null, changed:true,
+    ene:3.33, cur:4.95, prev:null, changed:true,
     narrativa:"<strong>Sin comunicación proactiva oficial sobre precios.</strong> El MOPC informa ajustes como resultado del mercado internacional sin ofrecer mecanismo de intervención ni narrativa de contención." },
   { pais:"Brasil",      iso:"br", tipo:"Productor",    subsidio:true,  subDesc:"Subsidio diésel R$0.32/L dic-26",
-    ene:4.77, cur:5.18, prev:null, changed:true,
+    ene:4.77, cur:5.17, prev:null, changed:true,
     narrativa:"El gobierno Lula dice: <strong>'mantenemos el subsidio al diésel hasta diciembre de 2026 para proteger el transporte y el costo de vida de los brasileños'</strong>. Petrobras fija el precio de la gasolina con paridad internacional moderada. Con el WTI en ~$103/bbl, el alza del crudo se ha trasladado parcialmente al consumidor (+7% desde enero)." }
 ];
 
-const REGIONAL_UPDATED = "04 may 2026";
+const REGIONAL_UPDATED = "05 may 2026";
 
 function flagImg(iso, pais) {
   return `<img src="https://flagcdn.com/20x15/${iso}.png" width="20" height="15" alt="" title="${pais}" class="flag-img">`;
