@@ -777,7 +777,8 @@ const TRACKING_DATA = [
   { date:"2026-05-27", wti:90.87, subWk:1069, execCum:10577, scenario:"base" },
   { date:"2026-05-28", wti:89.44, subWk:1005, execCum:10577, scenario:"base" },
   { date:"2026-05-29", wti:86.62, subWk:878, execCum:10577, scenario:"base" },
-  { date:"2026-05-30", wti:87.36, subWk:912, execCum:10577, scenario:"base" }
+  { date:"2026-05-30", wti:87.36, subWk:912, execCum:10577, scenario:"base" },
+  { date:"2026-05-31", wti:87.36, subWk:912, execCum:10577, scenario:"base" }
 ];
 
 const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
@@ -969,11 +970,11 @@ const REGIONAL_DATA = [
     ene:3.33, cur:5.09, prev:null, changed:true,
     narrativa:"<strong>Sin comunicación proactiva oficial sobre precios.</strong> El MOPC informa ajustes como resultado del mercado internacional sin ofrecer mecanismo de intervención ni narrativa de contención." },
   { pais:"Brasil",      iso:"br", tipo:"Productor",    subsidio:true,  subDesc:"Subsidio diésel R$0.32/L dic-26",
-    ene:4.77, cur:5.08, prev:null, changed:false,
+    ene:4.77, cur:5.09, prev:null, changed:false,
     narrativa:"El gobierno Lula dice: <strong>'mantenemos el subsidio al diésel hasta diciembre de 2026 para proteger el transporte y el costo de vida de los brasileños'</strong>. Petrobras fija el precio de la gasolina con paridad internacional moderada. Con el WTI en ~$103/bbl, el alza del crudo se ha trasladado parcialmente al consumidor (+7% desde enero)." }
 ];
 
-const REGIONAL_UPDATED = "30 may 2026";
+const REGIONAL_UPDATED = "31 may 2026";
 
 function flagImg(iso, pais) {
   return `<img src="https://flagcdn.com/20x15/${iso}.png" width="20" height="15" alt="" title="${pais}" class="flag-img">`;
