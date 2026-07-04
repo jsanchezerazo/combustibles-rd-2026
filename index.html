@@ -811,7 +811,8 @@ const TRACKING_DATA = [
   { date:"2026-06-30", wti:70.96, subWk:177, execCum:10577, scenario:"alivio" },
   { date:"2026-07-01", wti:68.84, subWk:82, execCum:10577, scenario:"alivio" },
   { date:"2026-07-02", wti:67.85, subWk:44, execCum:10577, scenario:"alivio" },
-  { date:"2026-07-03", wti:68.62, subWk:72, execCum:10577, scenario:"alivio" }
+  { date:"2026-07-03", wti:68.62, subWk:72, execCum:10577, scenario:"alivio" },
+  { date:"2026-07-04", wti:68.78, subWk:79, execCum:10577, scenario:"alivio" }
 ];
 
 const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
@@ -943,7 +944,7 @@ renderTracking();
 // ─────────────────────────────────────────────────────────────
 const REGIONAL_DATA = [
   { pais:"México",      iso:"mx", tipo:"Productor",    subsidio:true,  subDesc:"Tope MXN 28/L vía IEPS",
-    ene:5.18, cur:6.12, prev:null, changed:false,
+    ene:5.18, cur:6.13, prev:null, changed:false,
     narrativa:"El gobierno anuncia que <strong>'la gasolina en México sigue siendo de las más accesibles de Latinoamérica'</strong> gracias al tope de precios vía mecanismo IEPS. La administración Sheinbaum presenta el control como política soberana frente a la especulación internacional y la expansión de la refinería Olmeca como garantía de abasto." },
   { pais:"Guatemala",   iso:"gt", tipo:"No productor", subsidio:false, subDesc:null,
     ene:3.52, cur:5.03, prev:null, changed:false,
@@ -985,7 +986,7 @@ const REGIONAL_DATA = [
     ene:2.67, cur:3.02, prev:null, changed:false,
     narrativa:"El gobierno Noboa dice: <strong>'los subsidios generalizados eran un mecanismo de corrupción que beneficiaba a los más ricos'</strong>. Con precio de mercado, el Estado puede invertir en quienes más lo necesitan. La eliminación del subsidio se comunica como medida de transparencia fiscal." },
   { pais:"Perú",        iso:"pe", tipo:"Productor",    subsidio:false, subDesc:null,
-    ene:4.44, cur:6.19, prev:null, changed:false,
+    ene:4.44, cur:6.21, prev:null, changed:false,
     narrativa:"El Ministerio de Energía y Minas informa variaciones como reflejo del mercado internacional. <strong>Sin narrativa oficial de contención</strong> — el gobierno Boluarte no ha anunciado política activa de precio ante un alza de +40% desde enero, una de las mayores de la región." },
   { pais:"Bolivia",     iso:"bo", tipo:"Productor",    subsidio:false, subDesc:"Eliminado ene-2026",
     ene:3.79, cur:3.8, prev:null, changed:false,
@@ -1007,7 +1008,7 @@ const REGIONAL_DATA = [
     narrativa:"El gobierno Lula dice: <strong>'mantenemos el subsidio al diésel hasta diciembre de 2026 para proteger el transporte y el costo de vida de los brasileños'</strong>. Petrobras fija el precio de la gasolina con paridad internacional moderada. Con el WTI en ~$103/bbl, el alza del crudo se ha trasladado parcialmente al consumidor (+7% desde enero)." }
 ];
 
-const REGIONAL_UPDATED = "03 jul 2026";
+const REGIONAL_UPDATED = "04 jul 2026";
 
 function flagImg(iso, pais) {
   return `<img src="https://flagcdn.com/20x15/${iso}.png" width="20" height="15" alt="" title="${pais}" class="flag-img">`;
