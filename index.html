@@ -1069,6 +1069,7 @@ const REGIONAL_DATA = [
 ];
 
 const REGIONAL_UPDATED = "24 oct 2026";
+const NARRATIVAS_UPDATED = "9 abr 2026";   // Textos de cada país: los carga el HUB cada viernes
 
 function flagImg(iso, pais) {
   return `<img src="https://flagcdn.com/20x15/${iso}.png" width="20" height="15" alt="" title="${pais}" class="flag-img">`;
@@ -1213,7 +1214,7 @@ function renderNarrativa() {
       ${groupLabel('&#128666; Países No Productores','var(--gray1)')}
       ${noProductores.map(buildCard).join('')}
     </div>
-    <p class="source-note">Narrativas basadas en comunicados oficiales y medios regionales · Verificado: ${REGIONAL_UPDATED}</p>`;
+    <p class="source-note">Narrativas basadas en comunicados oficiales y medios regionales · Al ${NARRATIVAS_UPDATED}</p>`;
 }
 
 renderTable();
