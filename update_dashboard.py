@@ -33,8 +33,18 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 # ── CONFIGURACIÓN ──────────────────────────────────────────────────────────────
-GH_USER  = os.getenv("GH_USER",  "jsanchezerazo")
-GH_TOKEN = os.getenv("GH_TOKEN", "")           # ← Personal Access Token
+def _clave_hub(nombre):
+    """Las claves viven solo en el .env del HUB (segunda auditoría, 24 oct 2026)."""
+    ruta = Path.home() / ".se-hub" / ".env"
+    if ruta.exists():
+        for linea in ruta.read_text(encoding="utf-8").splitlines():
+            if linea.startswith(nombre + "="):
+                return linea.split("=", 1)[1].strip().strip('"').strip("'")
+    return ""
+
+
+GH_USER  = os.getenv("GH_USER") or _clave_hub("WTI_GH_USER") or "jsanchezerazo"
+GH_TOKEN = os.getenv("GH_TOKEN") or _clave_hub("WTI_GH_TOKEN")   # ← Personal Access Token
 GH_REPO  = "combustibles-rd-2026"
 GH_BRANCH= "main"
 
@@ -175,14 +185,27 @@ def get_wti_price() -> float:
 
 
 def sub_from_wti(wti: float) -> int:
-    """Función de subsidio semanal (calibrada con datos ene-mar 2026)."""
-    if wti <= 68:  return 44
-    if wti >= 160: return 5500
-    return round(44 + (1702 - 44) / (105 - 68) * (wti - 68))
+    """Subsidio semanal estimado (RD$M) para un WTI. Recalibrada el 24 oct 2026 con las 20 semanas reales del MICM de
+    jun-oct 2026 (subsidio = 50 x WTI - 3.121; R2 0,75; error medio RD$185M). Se usa solo si falta el dato del MICM."""
+    return max(0, round(50.0 * wti - 3121))
+
+
+def micm_de_la_fecha(script_dir: Path, fecha: str):
+    """La semana del MICM que cubre la fecha (subsidio semanal y acumulado reales), o la última conocida si la fecha
+    es posterior. Datos en subsidio_micm.json (se cargan cada semana con el anuncio del MICM)."""
+    ruta = script_dir / "subsidio_micm.json"
+    if not ruta.exists():
+        return None, False
+    semanas = json.loads(ruta.read_text(encoding="utf-8"))["semanas"]
+    for s in semanas:
+        if s["inicio"] <= fecha <= s["fin"]:
+            return s, True
+    previas = [s for s in semanas if s["fin"] < fecha]
+    return (previas[-1], False) if previas else (None, False)
 
 
 def scenario_from_wti(wti: float) -> str:
-    if wti <= 80:  return "alivio"
+    if wti <= 85:  return "alivio"
     if wti <= 110: return "base"
     return "escalada"
 
@@ -515,13 +538,17 @@ def git_push(html_path: str, commit_msg: str):
         return False
 
     work_dir = Path("/tmp/combustibles-rd-push")
-    repo_url  = f"https://{GH_USER}:{GH_TOKEN}@github.com/{GH_USER}/{GH_REPO}.git"
+    # El token viaja como encabezado: no queda en la dirección del remoto ni en .git/config
+    repo_url  = f"https://github.com/{GH_USER}/{GH_REPO}.git"
+    import base64
+    auth = ["-c", "http.extraheader=AUTHORIZATION: basic "
+            + base64.b64encode(f"{GH_USER}:{GH_TOKEN}".encode()).decode()]
 
     try:
         if work_dir.exists():
-            subprocess.run(["git", "-C", str(work_dir), "pull", "--rebase"], check=True)
+            subprocess.run(["git", *auth, "-C", str(work_dir), "pull", "--rebase"], check=True)
         else:
-            subprocess.run(["git", "clone", repo_url, str(work_dir)], check=True)
+            subprocess.run(["git", *auth, "clone", repo_url, str(work_dir)], check=True)
 
         import shutil
         shutil.copy(html_path, work_dir / "index.html")
@@ -536,7 +563,7 @@ def git_push(html_path: str, commit_msg: str):
             return True
 
         subprocess.run(["git", "-C", str(work_dir), "commit", "-m", commit_msg], check=True)
-        subprocess.run(["git", "-C", str(work_dir), "push", "origin", GH_BRANCH], check=True)
+        subprocess.run(["git", *auth, "-C", str(work_dir), "push", "origin", GH_BRANCH], check=True)
         print(f"  ✓ Push exitoso → https://{GH_USER}.github.io/{GH_REPO}")
         return True
 
@@ -578,10 +605,18 @@ def main():
     scenario = scenario_from_wti(wti)
     last     = get_last_tracking_data(html)
     exec_cum = last["execCum"] if last else 5583
+    # Ejecutado y subsidio reales del MICM (24 oct 2026: el ejecutado estaba congelado desde el 11 abr)
+    semana, vigente = micm_de_la_fecha(script_dir, today_str)
+    if semana:
+        exec_cum = semana["acumulado"]
+        if vigente:
+            sub_wk = semana["semanal"]
+        else:
+            print(f"  AVISO: no hay dato del MICM para esta semana; ejecutado al {semana['fin']} y subsidio estimado")
 
     print(f"  WTI       : ${wti}/bbl")
     print(f"  Subsidio  : RD${sub_wk:,}M/semana")
-    print(f"  Ejecutado : RD${exec_cum:,}M  |  Restante: RD${BUDGET-exec_cum:,}M")
+    print(f"  Ejecutado : RD${exec_cum:,}M  |  Sobre lo asignado (RD$23,748M): RD${exec_cum-23748:,.1f}M")
     print(f"  Escenario : {scenario}")
 
     new_entry = {

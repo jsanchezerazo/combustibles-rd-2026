@@ -1,0 +1,217 @@
+{
+ "nota": "Subsidio semanal anunciado por el MICM y acumulado de 2026 (RD$ millones). Acumulado reconstruido hacia atrás desde el dato exacto del MICM del 23 oct 2026 (RD$42,163 millones con la semana del 24 al 30 oct).",
+ "presupuesto": {
+  "original": 13748,
+  "reasignado_marzo": 10000,
+  "asignado": 23748,
+  "fuentes": [
+   "Presupuesto 2026, RD$13,748.41 millones estimados para el subsidio (El Día)",
+   "Reasignación de al menos RD$10,000 millones anunciada por la Presidencia el 22 mar 2026"
+  ]
+ },
+ "semanas": [
+  {
+   "inicio": "2026-04-11",
+   "fin": "2026-04-17",
+   "semanal": 1793.0,
+   "acumulado": 8868.4,
+   "fuente": "micm.gob.do/gobierno-subsidia-gasolinas-y-gasoil-con-rd1793-millones-y-congela-glp/"
+  },
+  {
+   "inicio": "2026-04-18",
+   "fin": "2026-04-24",
+   "semanal": 1153.8,
+   "acumulado": 10022.2,
+   "fuente": "micm.gob.do/gobierno-congela-todos-los-combustibles-con-subsidio-de-rd1153-8-millones/"
+  },
+  {
+   "inicio": "2026-04-25",
+   "fin": "2026-05-01",
+   "semanal": 1143.9,
+   "acumulado": 11166.1,
+   "fuente": "micm.gob.do/gobierno-se-sacrifica-con-subsidio-de-rd1143-9-millones-a-pesar-de-crisis/"
+  },
+  {
+   "inicio": "2026-05-02",
+   "fin": "2026-05-08",
+   "semanal": 1421.4,
+   "acumulado": 12587.5,
+   "fuente": "micm.gob.do/gobierno-reajusta-combustibles-y-mantiene-congelado-el-gl/"
+  },
+  {
+   "inicio": "2026-05-09",
+   "fin": "2026-05-15",
+   "semanal": 1657.0,
+   "acumulado": 14244.5,
+   "fuente": "micm.gob.do/gobierno-congela-combustibles-y-glp-con-subsidio-de-rd1657-millones/"
+  },
+  {
+   "inicio": "2026-05-16",
+   "fin": "2026-05-22",
+   "semanal": 1435.0,
+   "acumulado": 15679.5,
+   "fuente": "micm.gob.do/gobierno-reajusta-combustibles-y-mantiene-congelado-el-gl-2/"
+  },
+  {
+   "inicio": "2026-05-23",
+   "fin": "2026-05-29",
+   "semanal": 1588.5,
+   "acumulado": 17268.0,
+   "fuente": "micm.gob.do/gobierno-congela-combustibles-y-glp-con-subsidio-de-rd1588-5-millones/"
+  },
+  {
+   "inicio": "2026-05-30",
+   "fin": "2026-06-05",
+   "semanal": 954.9,
+   "acumulado": 18222.9,
+   "fuente": "micm.gob.do/gobierno-reajusta-combustibles-y-congela-glp/"
+  },
+  {
+   "inicio": "2026-06-06",
+   "fin": "2026-06-12",
+   "semanal": 780.3,
+   "acumulado": 19003.2,
+   "fuente": "micm.gob.do/gobierno-congela-precios-de-combustibles-esenciales/"
+  },
+  {
+   "inicio": "2026-06-13",
+   "fin": "2026-06-19",
+   "semanal": 555.7,
+   "acumulado": 19558.9,
+   "fuente": "micm.gob.do/gobierno-reajusta-combustibles-y-activa-periodo-de-congelacion-de-precios/"
+  },
+  {
+   "inicio": "2026-06-20",
+   "fin": "2026-06-26",
+   "semanal": 399.4,
+   "acumulado": 19958.3,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-06-27",
+   "fin": "2026-07-03",
+   "semanal": 161.9,
+   "acumulado": 20120.2,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-07-04",
+   "fin": "2026-07-10",
+   "semanal": 424.53,
+   "acumulado": 20544.7,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-07-11",
+   "fin": "2026-07-17",
+   "semanal": 523.7,
+   "acumulado": 21068.4,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-07-18",
+   "fin": "2026-07-24",
+   "semanal": 875.3,
+   "acumulado": 21943.7,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-07-25",
+   "fin": "2026-07-31",
+   "semanal": 1149.0,
+   "acumulado": 23092.7,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-08-01",
+   "fin": "2026-08-07",
+   "semanal": 1369.3,
+   "acumulado": 24462.0,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-08-08",
+   "fin": "2026-08-14",
+   "semanal": 931.79,
+   "acumulado": 25393.8,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-08-15",
+   "fin": "2026-08-21",
+   "semanal": 1087.9,
+   "acumulado": 26481.7,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-08-22",
+   "fin": "2026-08-28",
+   "semanal": 1312.31,
+   "acumulado": 27794.0,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-08-29",
+   "fin": "2026-09-04",
+   "semanal": 1209.1,
+   "acumulado": 29003.1,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-09-05",
+   "fin": "2026-09-11",
+   "semanal": 1294.5,
+   "acumulado": 30297.6,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-09-12",
+   "fin": "2026-09-18",
+   "semanal": 1631.5,
+   "acumulado": 31929.1,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-09-19",
+   "fin": "2026-09-25",
+   "semanal": 1985.7,
+   "acumulado": 33914.8,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-09-26",
+   "fin": "2026-10-02",
+   "semanal": 1770.65,
+   "acumulado": 35685.5,
+   "fuente": "micm.gob.do/gobierno-reajusta-combustibles-y-destina-rd1770-65-millones-en-subsidios/"
+  },
+  {
+   "inicio": "2026-10-03",
+   "fin": "2026-10-09",
+   "semanal": 1490.9,
+   "acumulado": 37176.4,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-10-10",
+   "fin": "2026-10-16",
+   "semanal": 1525.4,
+   "acumulado": 38701.8,
+   "fuente": "MICM (serie de la firma)"
+  },
+  {
+   "inicio": "2026-10-17",
+   "fin": "2026-10-23",
+   "semanal": 1860.3,
+   "acumulado": 40562.1,
+   "fuente": "MICM, nota del 16 oct 2026"
+  },
+  {
+   "inicio": "2026-10-24",
+   "fin": "2026-10-30",
+   "semanal": 1600.9,
+   "acumulado": 42163.0,
+   "fuente": "micm.gob.do/gobierno-congela-combustibles-8/ (acumulado exacto RD$42,163 millones)"
+  }
+ ]
+}
