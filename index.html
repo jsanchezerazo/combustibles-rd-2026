@@ -897,7 +897,8 @@ const TRACKING_DATA = [
   { date:"2026-10-21", wti:97.28, subWk:1860.3, execCum:40562.1, scenario:"base" },
   { date:"2026-10-22", wti:98.73, subWk:1860.3, execCum:40562.1, scenario:"base" },
   { date:"2026-10-23", wti:103.1, subWk:1860.3, execCum:40562.1, scenario:"base" },
-  { date:"2026-10-24", wti:103.27, subWk:1600.9, execCum:42163.0, scenario:"base" }
+  { date:"2026-10-24", wti:103.27, subWk:1600.9, execCum:42163.0, scenario:"base" },
+  { date:"2026-10-25", wti:103.27, subWk:1600.9, execCum:42163.0, scenario:"base" }
 ];
 
 const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
@@ -1004,7 +1005,7 @@ renderTracking();
 // ─────────────────────────────────────────────────────────────
 const REGIONAL_DATA = [
   { pais:"México",      iso:"mx", tipo:"Productor",    subsidio:true,  subDesc:"Estímulo IEPS al diésel",
-    ene:5.18, cur:5.72, prev:null, changed:false,
+    ene:5.18, cur:5.73, prev:null, changed:false,
     narrativa:"La presidenta Sheinbaum defendió los subsidios al advertir que sin ellos la gasolina regular pasaría de 30 pesos por litro y el diésel de 35 pesos. En la semana del 17 al 23 de octubre el gobierno absorbió por sexta semana seguida el 100 % del IEPS al diésel (7.36 pesos por litro) y sumó un estímulo de 2.53 pesos por litro para mantenerlo bajo 27 pesos." },
   { pais:"Guatemala",   iso:"gt", tipo:"No productor", subsidio:false, subDesc:"Exención de IVA e IDP hasta el 31/12",
     ene:3.52, cur:5.03, prev:null, changed:false,
@@ -1068,7 +1069,7 @@ const REGIONAL_DATA = [
     narrativa:"La brecha del diésel en las refinerías de Petrobras llegó a R$3,53 por litro según Abicom y superó por primera vez la subvención federal de R$3,52 por litro. El mercado espera un reajuste después de la segunda vuelta del 25 de octubre." }
 ];
 
-const REGIONAL_UPDATED = "24 oct 2026";
+const REGIONAL_UPDATED = "25 oct 2026";
 const NARRATIVAS_UPDATED = "24 oct 2026";   // Textos de cada país: los carga el HUB cada viernes
 
 function flagImg(iso, pais) {
