@@ -899,7 +899,8 @@ const TRACKING_DATA = [
   { date:"2026-10-23", wti:103.1, subWk:1860.3, execCum:40562.1, scenario:"base" },
   { date:"2026-10-24", wti:103.27, subWk:1600.9, execCum:42163.0, scenario:"base" },
   { date:"2026-10-25", wti:103.27, subWk:1600.9, execCum:42163.0, scenario:"base" },
-  { date:"2026-10-26", wti:102.06, subWk:1600.9, execCum:42163.0, scenario:"base" }
+  { date:"2026-10-26", wti:102.06, subWk:1600.9, execCum:42163.0, scenario:"base" },
+  { date:"2026-10-27", wti:99.98, subWk:1600.9, execCum:42163.0, scenario:"base" }
 ];
 
 const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
@@ -1006,7 +1007,7 @@ renderTracking();
 // ─────────────────────────────────────────────────────────────
 const REGIONAL_DATA = [
   { pais:"México",      iso:"mx", tipo:"Productor",    subsidio:true,  subDesc:"Estímulo IEPS al diésel",
-    ene:5.18, cur:5.71, prev:null, changed:true,
+    ene:5.18, cur:5.76, prev:null, changed:true,
     narrativa:"La presidenta Sheinbaum defendió los subsidios al advertir que sin ellos la gasolina regular pasaría de 30 pesos por litro y el diésel de 35 pesos. En la semana del 17 al 23 de octubre el gobierno absorbió por sexta semana seguida el 100 % del IEPS al diésel (7.36 pesos por litro) y sumó un estímulo de 2.53 pesos por litro para mantenerlo bajo 27 pesos." },
   { pais:"Guatemala",   iso:"gt", tipo:"No productor", subsidio:false, subDesc:"Exención de IVA e IDP hasta el 31/12",
     ene:3.52, cur:5.03, prev:null, changed:false,
@@ -1039,7 +1040,7 @@ const REGIONAL_DATA = [
     ene:4.59, cur:4.8, prev:null, changed:false, esRD:true,
     narrativa:"El Ministerio de Industria, Comercio y Mipymes congeló los precios de los combustibles principales del 24 al 30 de octubre con un subsidio de RD$1,600.9 millones, mientras otros cuatro combustibles suben. El acumulado de 2026 llega a RD$42,163 millones, por encima de los RD$23,748 millones asignados para el año." },
   { pais:"Colombia",    iso:"co", tipo:"Productor",    subsidio:false, subDesc:"Reversión del alza de gasolina",
-    ene:4.49, cur:4.87, prev:null, changed:false,
+    ene:4.49, cur:4.9, prev:null, changed:false,
     narrativa:"El presidente Abelardo De la Espriella ordenó revertir el alza de gasolina de octubre, de $46 por galón, y los ministerios de Hacienda y Minas lo confirmaron. Dijo: <strong>'He citado a la señora ministra de Minas y Energía luego de enterarme del aumento del precio de la gasolina.'</strong> El ACPM se mantuvo sin cambios en octubre." },
   { pais:"Venezuela",   iso:"ve", tipo:"Productor",    subsidio:true,  subDesc:"Subsidio extremo; precio administrativo",
     ene:0.04, cur:0.04, prev:null, changed:false, nc:true,
@@ -1051,26 +1052,26 @@ const REGIONAL_DATA = [
     ene:4.44, cur:6.14, prev:null, changed:false,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." },
   { pais:"Bolivia",     iso:"bo", tipo:"Productor",    subsidio:false, subDesc:"Eliminado ene-2026",
-    ene:3.79, cur:2.24, prev:null, changed:false,
+    ene:3.79, cur:2.23, prev:null, changed:false,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." },
   { pais:"Chile",       iso:"cl", tipo:"No productor", subsidio:false, subDesc:"Mepco, ajuste cada tres semanas",
-    ene:4.93, cur:5.86, prev:null, changed:true,
+    ene:4.93, cur:5.82, prev:null, changed:true,
     narrativa:"ENAP confirmó el 21 y 22 de octubre una nueva alza, con las bencinas en +$41,3 por litro y el diésel en +$91,5. El diésel acumula $401,4 por litro desde fines de julio. El Mepco, que opera cada tres semanas, regula las variaciones." },
   { pais:"Argentina",   iso:"ar", tipo:"Productor",    subsidio:false, subDesc:"Postergación de impuestos a combustibles",
-    ene:4.39, cur:5.31, prev:null, changed:false,
+    ene:4.39, cur:5.27, prev:null, changed:false,
     narrativa:"El Decreto 1126/2026 volvió a postergar el aumento pleno de los impuestos a los combustibles. Mantiene el esquema vigente durante todo octubre y traslada los incrementos al 1 de noviembre." },
   { pais:"Uruguay",     iso:"uy", tipo:"No productor", subsidio:false, subDesc:null,
-    ene:7.56, cur:7.25, prev:null, changed:false,
+    ene:7.56, cur:7.26, prev:null, changed:false,
     narrativa:"El Ministerio de Industria, Energía y Minería anunció desde el 1 de octubre un alza de 2 % en la gasolina, a $90,45 por litro, y de 7 % en el gasoil, a $62,79 por litro. El supergás se mantiene sin cambios." },
   { pais:"Paraguay",    iso:"py", tipo:"No productor", subsidio:false, subDesc:null,
-    ene:3.33, cur:5.41, prev:null, changed:true,
+    ene:3.33, cur:5.39, prev:null, changed:true,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." },
   { pais:"Brasil",      iso:"br", tipo:"Productor",    subsidio:true,  subDesc:"Subvención federal al diésel",
-    ene:4.77, cur:5.14, prev:null, changed:true,
+    ene:4.77, cur:4.72, prev:null, changed:true,
     narrativa:"La brecha del diésel en las refinerías de Petrobras llegó a R$3,53 por litro según Abicom y superó por primera vez la subvención federal de R$3,52 por litro. El mercado espera un reajuste después de la segunda vuelta del 25 de octubre." }
 ];
 
-const REGIONAL_UPDATED = "26 oct 2026";
+const REGIONAL_UPDATED = "27 oct 2026";
 const NARRATIVAS_UPDATED = "24 oct 2026";   // Textos de cada país: los carga el HUB cada viernes
 
 function flagImg(iso, pais) {
