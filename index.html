@@ -903,7 +903,8 @@ const TRACKING_DATA = [
   { date:"2026-10-27", wti:99.98, subWk:1600.9, execCum:42163.0, scenario:"base" },
   { date:"2026-10-28", wti:102.84, subWk:1600.9, execCum:42163.0, scenario:"base" },
   { date:"2026-10-29", wti:102.01, subWk:1600.9, execCum:42163.0, scenario:"base" },
-  { date:"2026-10-30", wti:104.82, subWk:1600.9, execCum:42163.0, scenario:"base" }
+  { date:"2026-10-30", wti:104.82, subWk:1600.9, execCum:42163.0, scenario:"base" },
+  { date:"2026-10-31", wti:104.12, subWk:1516.5, execCum:43679.5, scenario:"base" }
 ];
 
 const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
@@ -1040,7 +1041,7 @@ const REGIONAL_DATA = [
     ene:4.24, cur:4.28, prev:null, changed:false,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." },
   { pais:"Rep. Dom.",   iso:"do", tipo:"No productor", subsidio:true,  subDesc:"Congelamiento semanal con subsidio",
-    ene:4.59, cur:4.84, prev:null, changed:false, esRD:true,
+    ene:4.59, cur:4.83, prev:null, changed:false, esRD:true,
     narrativa:"El Ministerio de Industria, Comercio y Mipymes congeló los precios de los combustibles principales del 24 al 30 de octubre con un subsidio de RD$1,600.9 millones, mientras otros cuatro combustibles suben. El acumulado de 2026 llega a RD$42,163 millones, por encima de los RD$23,748 millones asignados para el año." },
   { pais:"Colombia",    iso:"co", tipo:"Productor",    subsidio:true, subDesc:"Subsidio estatal vía FEPC (por confirmar)",
     ene:4.49, cur:4.88, prev:null, changed:false,
@@ -1052,29 +1053,29 @@ const REGIONAL_DATA = [
     ene:2.67, cur:3.02, prev:null, changed:false,
     narrativa:"El Gobierno bajó 4 centavos la gasolina extra, la ecopaís y el diésel hasta el 11 de noviembre. Anunció que <strong>'Bajaremos, en beneficio de la ciudadanía, el precio de los combustibles ecopaís, extra y diésel en 4 centavos'</strong>. El subsidio al diésel sube de US$1,22 a US$1,85 por galón." },
   { pais:"Perú",        iso:"pe", tipo:"Productor",    subsidio:false, subDesc:null,
-    ene:4.44, cur:6.12, prev:null, changed:false,
+    ene:4.44, cur:6.1, prev:null, changed:false,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." },
   { pais:"Bolivia",     iso:"bo", tipo:"Productor",    subsidio:false, subDesc:null,
     ene:3.79, cur:2.19, prev:null, changed:false,
     narrativa:"El presidente Rodrigo Paz derogó hacia el 1 de octubre la subvención a la gasolina de aviación, que pasa a precio internacional. La medida sigue a la eliminación del subsidio al diésel, que subió cerca de 83 %. El decreto busca «garantizar el abastecimiento de combustibles en el mercado interno»." },
   { pais:"Chile",       iso:"cl", tipo:"No productor", subsidio:false, subDesc:null,
-    ene:4.93, cur:5.87, prev:null, changed:true,
+    ene:4.93, cur:5.88, prev:null, changed:true,
     narrativa:"Enap informó el 22 de octubre la quinta alza consecutiva desde julio. Las gasolinas de 93 y 97 octanos subieron $41,3 por litro. Una autoridad dijo que se hace «un esfuerzo muy grande por que estas alzas sean lo más pausadas posibles»." },
   { pais:"Argentina",   iso:"ar", tipo:"Productor",    subsidio:false, subDesc:null,
-    ene:4.39, cur:5.27, prev:null, changed:false,
+    ene:4.39, cur:5.28, prev:null, changed:false,
     narrativa:"El Decreto 1305/2026, publicado en el Boletín Oficial el 30 de octubre, posterga al 1 de diciembre los aumentos del Impuesto a los Combustibles Líquidos y del Impuesto al Dióxido de Carbono. Los incrementos debían regir el 1 de noviembre." },
   { pais:"Uruguay",     iso:"uy", tipo:"No productor", subsidio:true, subDesc:"Precios máximos bajo paridad",
     ene:7.56, cur:7.24, prev:null, changed:false,
     narrativa:"El Poder Ejecutivo ajustó hacia el 1 de octubre los precios máximos y los mantuvo por debajo de las referencias internacionales, con la nafta súper en $93,56 por litro. El 27 de octubre la Ursea recomendó subir 31 % el gasoil y 3 % las naftas desde el 1 de noviembre, y el Gobierno aún no ha definido." },
   { pais:"Paraguay",    iso:"py", tipo:"No productor", subsidio:false, subDesc:null,
-    ene:3.33, cur:5.38, prev:null, changed:true,
+    ene:3.33, cur:5.37, prev:null, changed:true,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." },
   { pais:"Brasil",      iso:"br", tipo:"Productor",    subsidio:true,  subDesc:"Subvención federal al diésel",
-    ene:4.77, cur:4.79, prev:null, changed:true,
+    ene:4.77, cur:4.75, prev:null, changed:true,
     narrativa:"El Gobierno discute prorrogar por 30 días la subvención al diésel, que vencía el 25 de octubre, sin decisión confirmada. Petrobras informó el 26 de octubre a la CVM que su consejo analizó la estrategia de combustibles sin decidir reajustes." }
 ];
 
-const REGIONAL_UPDATED = "30 oct 2026";
+const REGIONAL_UPDATED = "31 oct 2026";
 const NARRATIVAS_UPDATED = "30 oct 2026";   // Textos de cada país: los carga el HUB cada viernes
 
 function flagImg(iso, pais) {
