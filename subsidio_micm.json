@@ -219,7 +219,14 @@
    "semanal": 1516.5,
    "acumulado": 43679.5,
    "fuente": "https://noticiassin.com/pais/nacional/2026/10/30/borrador-automatico-23-2158977 (el MICM dijo RD$43,324.0 millones; no cuadra con la cadena y se usa RD$43,679.5)"
+  },
+  {
+   "inicio": "2026-11-07",
+   "fin": "2026-11-13",
+   "semanal": 1139.1,
+   "acumulado": 44818.6,
+   "fuente": "https://acento.com.do/economia/gobierno-aumenta-rd-4-a-las-gasolinas-premium-y-al-gasoil-optimo-9785553.html (el MICM dijo RD$44,000.0 millones; no cuadra con la cadena y se usa RD$44,818.6)"
   }
  ],
- "textos_al": "2026-10-30"
+ "textos_al": "2026-11-06"
 }
