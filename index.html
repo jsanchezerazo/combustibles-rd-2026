@@ -916,7 +916,8 @@ const TRACKING_DATA = [
   { date:"2026-11-09", wti:86.79, subWk:1139.1, execCum:44818.6, scenario:"base" },
   { date:"2026-11-10", wti:85.98, subWk:1139.1, execCum:44818.6, scenario:"base" },
   { date:"2026-11-11", wti:87.27, subWk:1139.1, execCum:44818.6, scenario:"base" },
-  { date:"2026-11-12", wti:88.55, subWk:1139.1, execCum:44818.6, scenario:"base" }
+  { date:"2026-11-12", wti:88.55, subWk:1139.1, execCum:44818.6, scenario:"base" },
+  { date:"2026-11-13", wti:88.68, subWk:1139.1, execCum:44818.6, scenario:"base" }
 ];
 
 const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
@@ -1023,7 +1024,7 @@ renderTracking();
 // ─────────────────────────────────────────────────────────────
 const REGIONAL_DATA = [
   { pais:"México",      iso:"mx", tipo:"Productor",    subsidio:false,  subDesc:null,
-    ene:5.18, cur:5.74, prev:null, changed:false,
+    ene:5.18, cur:5.75, prev:null, changed:false,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." },
   { pais:"Guatemala",   iso:"gt", tipo:"No productor", subsidio:false, subDesc:null,
     ene:3.52, cur:5.03, prev:null, changed:false,
@@ -1053,10 +1054,10 @@ const REGIONAL_DATA = [
     ene:4.24, cur:4.28, prev:null, changed:false,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." },
   { pais:"Rep. Dom.",   iso:"do", tipo:"No productor", subsidio:true,  subDesc:"Congelamiento semanal con subsidio",
-    ene:4.59, cur:4.84, prev:null, changed:false, esRD:true,
+    ene:4.59, cur:4.82, prev:null, changed:false, esRD:true,
     narrativa:"El MICM subió RD$4.00 por galón la gasolina premium y el gasoil óptimo del 7 al 13 de noviembre y mantuvo congelados la gasolina regular, el gasoil regular y el GLP. Destinó RD$1,139.1 millones al subsidio de la semana, y el acumulado de 2026 llega a RD$44,819 millones, sobre los RD$23,748 millones asignados para el año." },
   { pais:"Colombia",    iso:"co", tipo:"Productor",    subsidio:true, subDesc:"Costo fiscal en gasolina corriente",
-    ene:4.49, cur:4.68, prev:null, changed:false,
+    ene:4.49, cur:4.7, prev:null, changed:false,
     narrativa:"El Gobierno Nacional mantiene sin cambios la gasolina corriente y el ACPM en noviembre. El costo fiscal de la gasolina corriente se estima en COP $15.500 millones, y la continuidad en diciembre se evaluará según el mercado internacional y los recursos fiscales." },
   { pais:"Venezuela",   iso:"ve", tipo:"Productor",    subsidio:true,  subDesc:"Subsidio extremo; precio administrativo",
     ene:0.04, cur:0.04, prev:null, changed:false, nc:true,
@@ -1065,29 +1066,29 @@ const REGIONAL_DATA = [
     ene:2.67, cur:3.02, prev:null, changed:false,
     narrativa:"El sistema de bandas actualizó el 12 de octubre los precios hasta el 11 de noviembre. La gasolina Extra, la Ecopaís y el diésel Premium bajan USD 0,04 por galón, y la Súper, sin subsidio, sube de USD 4,89 a USD 5,42. El próximo ajuste corresponde al 12 de noviembre." },
   { pais:"Perú",        iso:"pe", tipo:"Productor",    subsidio:false, subDesc:null,
-    ene:4.44, cur:6.18, prev:null, changed:false,
+    ene:4.44, cur:6.19, prev:null, changed:false,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." },
   { pais:"Bolivia",     iso:"bo", tipo:"Productor",    subsidio:false, subDesc:null,
     ene:3.79, cur:2.23, prev:null, changed:true,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." },
   { pais:"Chile",       iso:"cl", tipo:"No productor", subsidio:false, subDesc:null,
-    ene:4.93, cur:5.91, prev:null, changed:true,
+    ene:4.93, cur:5.89, prev:null, changed:true,
     narrativa:"Enap, empresa estatal, informó el 22 de octubre un nuevo alza de combustibles, la quinta consecutiva desde julio y la quinta del gobierno de Kast, con el diésel subiendo USD 0,93 por litro según Infobae. Se prevé otro reajuste el 12 de noviembre." },
   { pais:"Argentina",   iso:"ar", tipo:"Productor",    subsidio:false, subDesc:null,
-    ene:4.39, cur:5.25, prev:null, changed:false,
+    ene:4.39, cur:5.26, prev:null, changed:false,
     narrativa:"La Resolución 306/2026 fijó el precio mínimo del bioetanol de caña en $1.104,886 por litro para la mezcla obligatoria con nafta. Según Perfil, la medida podría impactar el precio de las naftas y del gasoil." },
   { pais:"Uruguay",     iso:"uy", tipo:"No productor", subsidio:true, subDesc:"Estrategia de amortiguación",
-    ene:7.56, cur:7.17, prev:null, changed:true,
+    ene:7.56, cur:7.13, prev:null, changed:true,
     narrativa:"El Ministerio de Industria, Energía y Minería evitó el 30 de octubre alzas de 3,3 % en la gasolina y 31,3 % en el gasoil, y mantiene el litro en $90,45 y $62,79 pesos uruguayos. El comunicado indica que <strong>'El Poder Ejecutivo resolvió no trasladar el aumento a los consumidores'</strong>." },
   { pais:"Paraguay",    iso:"py", tipo:"No productor", subsidio:false, subDesc:null,
-    ene:3.33, cur:5.04, prev:null, changed:true,
+    ene:3.33, cur:5.01, prev:null, changed:true,
     narrativa:"Petropar, empresa estatal, subió el 28 de octubre el diésel Porã en G. 500 y el Mbarete en G. 600 por litro, que quedan en G. 9.285 y G. 11.395, en la sexta suba del año. Las gasolinas se mantienen. Su presidente, William Wilka, dijo que Paraguay tiene por primera vez precios superiores a los de Brasil y Argentina." },
   { pais:"Brasil",      iso:"br", tipo:"Productor",    subsidio:false,  subDesc:null,
-    ene:4.77, cur:4.61, prev:null, changed:false,
+    ene:4.77, cur:4.57, prev:null, changed:false,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." }
 ];
 
-const REGIONAL_UPDATED = "12 nov 2026";
+const REGIONAL_UPDATED = "13 nov 2026";
 const NARRATIVAS_UPDATED = "6 nov 2026";   // Textos de cada país: los carga el HUB cada viernes
 
 function flagImg(iso, pais) {
