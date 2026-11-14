@@ -226,7 +226,14 @@
    "semanal": 1139.1,
    "acumulado": 44818.6,
    "fuente": "https://acento.com.do/economia/gobierno-aumenta-rd-4-a-las-gasolinas-premium-y-al-gasoil-optimo-9785553.html (el MICM dijo RD$44,000.0 millones; no cuadra con la cadena y se usa RD$44,818.6)"
+  },
+  {
+   "inicio": "2026-11-14",
+   "fin": "2026-11-20",
+   "semanal": 796.4,
+   "acumulado": 45615.0,
+   "fuente": "https://micm.gob.do/gobierno-congela-precios-de-los-principales-combustibles/ (el MICM dijo RD$45,253.0 millones; no cuadra con la cadena y se usa RD$45,615.0)"
   }
  ],
- "textos_al": "2026-11-06"
+ "textos_al": "2026-11-13"
 }
