@@ -918,7 +918,8 @@ const TRACKING_DATA = [
   { date:"2026-11-11", wti:87.27, subWk:1139.1, execCum:44818.6, scenario:"base" },
   { date:"2026-11-12", wti:88.55, subWk:1139.1, execCum:44818.6, scenario:"base" },
   { date:"2026-11-13", wti:88.68, subWk:1139.1, execCum:44818.6, scenario:"base" },
-  { date:"2026-11-14", wti:88.56, subWk:796.4, execCum:45615.0, scenario:"base" }
+  { date:"2026-11-14", wti:88.56, subWk:796.4, execCum:45615.0, scenario:"base" },
+  { date:"2026-11-15", wti:88.56, subWk:796.4, execCum:45615.0, scenario:"base" }
 ];
 
 const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
@@ -1025,7 +1026,7 @@ renderTracking();
 // ─────────────────────────────────────────────────────────────
 const REGIONAL_DATA = [
   { pais:"México",      iso:"mx", tipo:"Productor",    subsidio:true,  subDesc:"Estímulo fiscal al IEPS",
-    ene:5.18, cur:5.76, prev:null, changed:false,
+    ene:5.18, cur:5.77, prev:null, changed:false,
     narrativa:"El 7 de noviembre Hacienda redujo el estímulo fiscal a las gasolinas Magna y Premium. El IEPS pasa a $4.9575 pesos por litro en regular y $4.2712 pesos en premium del 7 al 13 de noviembre, el cuarto aumento semanal seguido. El diésel mantiene 100% de estímulo y su subsidio complementario bajó 38.8%, a $1.59 pesos por litro." },
   { pais:"Guatemala",   iso:"gt", tipo:"No productor", subsidio:false, subDesc:null,
     ene:3.52, cur:5.03, prev:null, changed:false,
@@ -1089,7 +1090,7 @@ const REGIONAL_DATA = [
     narrativa:"Según la Abicom, el 8 de noviembre el Gobierno puso en cero el PIS/Cofins y la Cide sobre la gasolina, y las subvenciones al diésel suman R$3,52 por litro y vencen en noviembre. A fines de octubre, según Brasil em Folhas, el Gobierno prorrogó por 30 días los subsidios al combustible." }
 ];
 
-const REGIONAL_UPDATED = "14 nov 2026";
+const REGIONAL_UPDATED = "15 nov 2026";
 const NARRATIVAS_UPDATED = "13 nov 2026";   // Textos de cada país: los carga el HUB cada viernes
 
 function flagImg(iso, pais) {
