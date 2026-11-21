@@ -233,7 +233,33 @@
    "semanal": 796.4,
    "acumulado": 45615.0,
    "fuente": "https://micm.gob.do/gobierno-congela-precios-de-los-principales-combustibles/ (el MICM dijo RD$45,253.0 millones; no cuadra con la cadena y se usa RD$45,615.0)"
+  },
+  {
+   "inicio": "2026-11-21",
+   "fin": "2026-11-27",
+   "semanal": 573.5,
+   "acumulado": 46188.5,
+   "fuente": "https://micm.gob.do/gobierno-congela-precios-de-principales-combustibles/ (el MICM dijo RD$45,598.0 millones; no cuadra con la cadena y se usa RD$46,188.5)"
   }
  ],
- "textos_al": "2026-11-13"
+ "textos_al": "2026-11-20",
+ "hechos_por_pais": {
+  "Guatemala": "2026-11-18",
+  "Belice": "2026-11-11",
+  "Honduras": "2026-11-16",
+  "El Salvador": "2026-11-09",
+  "Nicaragua": "2026-11-08",
+  "Costa Rica": "2026-11-10",
+  "Panamá": "2026-11-13",
+  "Rep. Dom.": "2026-11-20",
+  "Colombia": "2026-10-31",
+  "Ecuador": "2026-11-12",
+  "Perú": "2026-11-19",
+  "Bolivia": "2026-11-20",
+  "Chile": "2026-11-11",
+  "Argentina": "2026-10-30",
+  "Uruguay": "2026-10-31",
+  "Paraguay": "2026-11-13",
+  "Brasil": "2026-11-16"
+ }
 }
