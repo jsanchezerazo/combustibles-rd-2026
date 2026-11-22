@@ -925,7 +925,8 @@ const TRACKING_DATA = [
   { date:"2026-11-18", wti:82.46, subWk:796.4, execCum:45615.0, scenario:"alivio" },
   { date:"2026-11-19", wti:82.74, subWk:796.4, execCum:45615.0, scenario:"alivio" },
   { date:"2026-11-20", wti:83.49, subWk:796.4, execCum:45615.0, scenario:"alivio" },
-  { date:"2026-11-21", wti:83.98, subWk:573.5, execCum:46188.5, scenario:"alivio" }
+  { date:"2026-11-21", wti:83.98, subWk:573.5, execCum:46188.5, scenario:"alivio" },
+  { date:"2026-11-22", wti:83.41, subWk:573.5, execCum:46188.5, scenario:"alivio" }
 ];
 
 const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
@@ -1032,7 +1033,7 @@ renderTracking();
 // ─────────────────────────────────────────────────────────────
 const REGIONAL_DATA = [
   { pais:"México",      iso:"mx", tipo:"Productor",    subsidio:false,  subDesc:null,
-    ene:5.18, cur:5.62, prev:null, changed:false,
+    ene:5.18, cur:5.6, prev:null, changed:false,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." },
   { pais:"Guatemala",   iso:"gt", tipo:"No productor", subsidio:true, subDesc:"Exoneración de impuestos hasta 30/06/2027",
     ene:3.52, cur:5.03, prev:null, changed:false,
@@ -1074,29 +1075,29 @@ const REGIONAL_DATA = [
     ene:2.67, cur:3.02, prev:null, changed:false,
     narrativa:"El presidente Noboa anunció una baja de 5 centavos de dólar en la gasolina extra, la ecopaís y el diésel desde el 12 de noviembre. El decreto aplica por una sola vez un valor distinto en la fórmula. La extra queda en US$3,124 por galón y el diésel premium en US$3,063." },
   { pais:"Perú",        iso:"pe", tipo:"Productor",    subsidio:false, subDesc:null,
-    ene:4.44, cur:6.16, prev:null, changed:false,
+    ene:4.44, cur:6.14, prev:null, changed:false,
     narrativa:"El 19 de noviembre Infobae reportó una declaratoria de emergencia en el abastecimiento de combustibles, vinculada al fenómeno de El Niño. La nota recoge alzas en grifos, con el GLP a S/8,39 frente a S/6 a S/6,50 semanas antes." },
   { pais:"Bolivia",     iso:"bo", tipo:"Productor",    subsidio:true, subDesc:"Subvención vía asignación a YPFB",
     ene:3.79, cur:2.25, prev:null, changed:true,
     narrativa:"El gobierno autorizó elevar hasta Bs 9.000 millones la asignación a YPFB para cubrir la subvención. La gasolina sigue subvencionada en Bs 6,96 por litro y el diésel está en Bs 17,95. El 10 de noviembre la ANH fijó nuevos parámetros de cálculo del diésel con la resolución 0048/2026." },
   { pais:"Chile",       iso:"cl", tipo:"No productor", subsidio:true, subDesc:"Congelamiento vía MEPCO",
-    ene:4.93, cur:5.75, prev:null, changed:true,
+    ene:4.93, cur:5.71, prev:null, changed:true,
     narrativa:"El 11 de noviembre el biministro Claudio Alvarado anunció un congelamiento de precios y un proyecto de ley para anular el alza del MEPCO, de $39 en gasolinas y $42 en diésel prevista para el 12 de noviembre. Los medios reportan vigencia hasta febrero o abril de 2027." },
   { pais:"Argentina",   iso:"ar", tipo:"Productor",    subsidio:false, subDesc:null,
-    ene:4.39, cur:5.19, prev:null, changed:false,
+    ene:4.39, cur:5.15, prev:null, changed:false,
     narrativa:"El 30 de octubre el gobierno volvió a postergar la actualización de los impuestos a los combustibles líquidos y al dióxido de carbono, que iba a comenzar el 1 de noviembre." },
   { pais:"Uruguay",     iso:"uy", tipo:"No productor", subsidio:true, subDesc:"Precios retenidos bajo paridad Ursea",
     ene:7.56, cur:7.17, prev:null, changed:false,
     narrativa:"El Poder Ejecutivo mantuvo sin cambios los combustibles en noviembre. La nafta súper queda en $90,45 por litro, el gasoil 50S en $62,79 y el supergás en $93,56 por kilo. Según la Ursea correspondía subir 3,3 % las gasolinas y 31,3 % el gasoil." },
   { pais:"Paraguay",    iso:"py", tipo:"No productor", subsidio:true, subDesc:"Baja de Petropar y mitad del ISC al gasoil",
-    ene:3.33, cur:4.98, prev:null, changed:false,
+    ene:3.33, cur:4.97, prev:null, changed:false,
     narrativa:"El 13 de noviembre el gobierno anunció una baja de G. 300 por litro en Petropar, vigente hasta el 31 de diciembre, y redujo a la mitad el ISC del gasoil. El Diésel Porã queda en G. 8.985 por litro. El 17 de noviembre la baja ya llegaba a la mayoría de los privados." },
   { pais:"Brasil",      iso:"br", tipo:"Productor",    subsidio:true,  subDesc:"Subsidio al diésel importado R$2,12/l",
-    ene:4.77, cur:4.35, prev:null, changed:false,
+    ene:4.77, cur:4.32, prev:null, changed:false,
     narrativa:"Según Brasil do Trecho, el gobierno federal no renovó el subsidio adicional de R$1,40 por litro al diésel importado, que terminó el 12 de noviembre. Se mantiene el de R$2,12. Según la Abicom, el diésel de Petrobras estaba R$2,91 por litro bajo el costo de importación." }
 ];
 
-const REGIONAL_UPDATED = "21 nov 2026";
+const REGIONAL_UPDATED = "22 nov 2026";
 const NARRATIVAS_UPDATED = "20 nov 2026";   // Textos de cada país: los carga el HUB cada viernes
 
 function flagImg(iso, pais) {
