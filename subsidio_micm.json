@@ -240,26 +240,32 @@
    "semanal": 573.5,
    "acumulado": 46188.5,
    "fuente": "https://micm.gob.do/gobierno-congela-precios-de-principales-combustibles/ (el MICM dijo RD$45,598.0 millones; no cuadra con la cadena y se usa RD$46,188.5)"
+  },
+  {
+   "inicio": "2026-11-28",
+   "fin": "2026-12-04",
+   "semanal": 402.4,
+   "acumulado": 46590.9,
+   "fuente": "https://acento.com.do/economia/gobierno-destina-rd402-4-millones-a-subsidiar-combustibles-pese-a-fmi-9798146.html (el MICM dijo RD$46,145.0 millones; no cuadra con la cadena y se usa RD$46,590.9)"
   }
  ],
- "textos_al": "2026-11-20",
+ "textos_al": "2026-11-27",
  "hechos_por_pais": {
   "Guatemala": "2026-11-18",
   "Belice": "2026-11-11",
   "Honduras": "2026-11-16",
-  "El Salvador": "2026-11-09",
-  "Nicaragua": "2026-11-08",
-  "Costa Rica": "2026-11-10",
-  "Panamá": "2026-11-13",
-  "Rep. Dom.": "2026-11-20",
+  "El Salvador": "2026-11-24",
+  "Nicaragua": "2026-11-20",
+  "Costa Rica": "2026-11-04",
+  "Panamá": "2026-11-26",
+  "República Dominicana": "2026-11-27",
   "Colombia": "2026-10-31",
   "Ecuador": "2026-11-12",
   "Perú": "2026-11-19",
-  "Bolivia": "2026-11-20",
-  "Chile": "2026-11-11",
+  "Bolivia": "2026-11-24",
+  "Chile": "2026-11-20",
   "Argentina": "2026-10-30",
-  "Uruguay": "2026-10-31",
-  "Paraguay": "2026-11-13",
-  "Brasil": "2026-11-16"
+  "Paraguay": "2026-11-27",
+  "Brasil": "2026-11-12"
  }
 }
