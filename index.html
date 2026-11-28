@@ -931,7 +931,8 @@ const TRACKING_DATA = [
   { date:"2026-11-24", wti:81.59, subWk:573.5, execCum:46188.5, scenario:"alivio" },
   { date:"2026-11-25", wti:84.12, subWk:573.5, execCum:46188.5, scenario:"alivio" },
   { date:"2026-11-26", wti:84.91, subWk:573.5, execCum:46188.5, scenario:"alivio" },
-  { date:"2026-11-27", wti:83.08, subWk:573.5, execCum:46188.5, scenario:"alivio" }
+  { date:"2026-11-27", wti:83.08, subWk:573.5, execCum:46188.5, scenario:"alivio" },
+  { date:"2026-11-28", wti:83.08, subWk:402.4, execCum:46590.9, scenario:"alivio" }
 ];
 
 const MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
@@ -1038,7 +1039,7 @@ renderTracking();
 // ─────────────────────────────────────────────────────────────
 const REGIONAL_DATA = [
   { pais:"México",      iso:"mx", tipo:"Productor",    subsidio:false,  subDesc:null,
-    ene:5.18, cur:5.43, prev:null, changed:false,
+    ene:5.18, cur:5.45, prev:null, changed:false,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." },
   { pais:"Guatemala",   iso:"gt", tipo:"No productor", subsidio:true, subDesc:"Exoneración de impuestos hasta 30/06/2027",
     ene:3.52, cur:5.03, prev:null, changed:false,
@@ -1068,7 +1069,7 @@ const REGIONAL_DATA = [
     ene:4.24, cur:4.28, prev:null, changed:false,
     narrativa:"No se registran anuncios oficiales sobre el precio de los combustibles en las fuentes revisadas de los últimos 30 días." },
   { pais:"Rep. Dom.",   iso:"do", tipo:"No productor", subsidio:true,  subDesc:"Congelamiento semanal con subsidio",
-    ene:4.59, cur:4.91, prev:null, changed:true, esRD:true,
+    ene:4.59, cur:4.9, prev:null, changed:true, esRD:true,
     narrativa:"El MICM destinó RD$573,5 millones para mantener congelados los combustibles del 21 al 27 de noviembre. La premium queda en RD$362,10 por galón, la regular en RD$317,50 y el gasoil regular en RD$270,80. El subsidio acumulado de 2026 llega a RD$46.188 millones, frente a RD$23.748 millones asignados para el año." },
   { pais:"Colombia",    iso:"co", tipo:"Productor",    subsidio:true, subDesc:"Precio mantenido por el Gobierno",
     ene:4.49, cur:4.32, prev:null, changed:true,
@@ -1080,13 +1081,13 @@ const REGIONAL_DATA = [
     ene:2.67, cur:3.02, prev:null, changed:false,
     narrativa:"El presidente Daniel Noboa anunció una baja de cinco centavos de dólar por galón en la gasolina Extra, la Ecopaís y el diésel desde el 12 de noviembre. El diésel bajaría de US$3,113 a US$3,063 por galón." },
   { pais:"Perú",        iso:"pe", tipo:"Productor",    subsidio:false, subDesc:null,
-    ene:4.44, cur:6.09, prev:null, changed:false,
+    ene:4.44, cur:6.1, prev:null, changed:false,
     narrativa:"El 19 de noviembre Infobae reportó una declaratoria de emergencia en el abastecimiento de combustibles, vinculada al fenómeno de El Niño. La nota recoge alzas en grifos, con el GLP a S/8,39 frente a S/6 a S/6,50 semanas antes." },
   { pais:"Bolivia",     iso:"bo", tipo:"Productor",    subsidio:false, subDesc:"Retiro de subvención al diésel",
     ene:3.79, cur:2.23, prev:null, changed:false,
     narrativa:"El diésel pasó a Bs 20,57 por litro desde el 24 de noviembre, y la ANH lo presentó como una medida para <strong>'sincerar el precio del diésel oil regulado respecto a su paridad en el mercado'</strong>. El 26 de noviembre el vocero José Luis Gálvez dijo que no hay posibilidad de volver a subvencionar el diésel." },
   { pais:"Chile",       iso:"cl", tipo:"No productor", subsidio:true, subDesc:"Congelamiento de precios hasta abril",
-    ene:4.93, cur:5.58, prev:null, changed:false,
+    ene:4.93, cur:5.57, prev:null, changed:false,
     narrativa:"El 10 de noviembre el gobierno ratificó una sexta alza consecutiva de $40 por litro desde el 12 de noviembre, y el presidente José Antonio Kast anunció la urgencia de la «Ley Frenazo», con un techo de $20 a las variaciones. Según Infobae, el gobierno congeló los precios hasta abril de 2027, con el diésel en unos USD 1,48 por litro." },
   { pais:"Argentina",   iso:"ar", tipo:"Productor",    subsidio:true, subDesc:"Impuesto a los combustibles diferido",
     ene:4.39, cur:5.07, prev:null, changed:false,
@@ -1098,11 +1099,11 @@ const REGIONAL_DATA = [
     ene:3.33, cur:4.86, prev:null, changed:true,
     narrativa:"El 13 de noviembre el gobierno de Pedro Alliana informó una baja de G. 300 por litro en los combustibles de Petropar y una reducción del 50% del ISC al gasoil. El 27 de noviembre el kilo de gas doméstico bajó de G. 7.374 a G. 6.734." },
   { pais:"Brasil",      iso:"br", tipo:"Productor",    subsidio:true,  subDesc:"Subsidio al diésel importado",
-    ene:4.77, cur:4.45, prev:null, changed:false,
+    ene:4.77, cur:4.6, prev:null, changed:false,
     narrativa:"El gobierno federal decidió no renovar el subsidio adicional de R$ 1,40 por litro al diésel importado, que terminó el 12 de noviembre. En la semana del 8 al 14 de noviembre el diésel S10 costó en promedio R$ 7,29 por litro." }
 ];
 
-const REGIONAL_UPDATED = "27 nov 2026";
+const REGIONAL_UPDATED = "28 nov 2026";
 const NARRATIVAS_UPDATED = "27 nov 2026";   // Textos de cada país: los carga el HUB cada viernes
 
 function flagImg(iso, pais) {
